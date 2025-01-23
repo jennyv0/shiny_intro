@@ -4749,12 +4749,6 @@
     "_site/slides/bslib.html": {
       "checksum": "e18bdbb64d6da9b3647842e1eab9ff15"
     },
-    "_site/slides/Exercise.html": {
-      "checksum": "eac268b7dfbb4026fc2e7c1516b4f705"
-    },
-    "_site/slides/Features of an Betfair Shiny App.html": {
-      "checksum": "7ac03870189fa0051b6cff31ac24922f"
-    },
     "_site/slides/FlexDashboard Framework.html": {
       "checksum": "709ddde1158056568323b6a0de7402b1"
     },
@@ -5171,9 +5165,6 @@
     },
     "slides/bslib.qmd": {
       "checksum": "68396e0f150ed63a0faa5d960cbd6722"
-    },
-    "slides/Exercise.qmd": {
-      "checksum": "4a7a0089f8a4230d9176795058547068"
     },
     "slides/FlexDashboard Framework.qmd": {
       "checksum": "74cea214d88fe173fc56a2819728c843"
