@@ -1,0 +1,1143 @@
+---
+title: "Reactivity"
+format:
+  html:
+    resources: 
+      - shinylive-sw.js
+filters:
+- shinylive
+---
+
+# Basic Reactivity
+
+The beauty of the Shiny app is the `reactivity`.
+
+Shiny apps are build on 'reactivity' to make them interactive and responsive. So when you click on a button, or change something on the screen, the app updates itself without having to refresh the whole page. (Like other libraries used to create dashboards)
+
+In a fully functioning Shiny app, you should be able to map out every interaction, calculation and output using a "reactive graph".
+
+![](images/pythagoras.gif){fig-align="center" width="100%"} 
+
+### Example: 
+
+**Let's say we have an app with two plots (a scatter and distribution plot), and two inputs (a checkbox, and a slider). The scatter plot can be modified with both the checkbox and the slider, distribution plot is only interactive with the slider.:**
+
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot))
+  Sl[Slider] --> Sc 
+  Sl --> M((Dist Plot))
+  
+  classDef changed fill:#f96
+```
+
+
+**Initial state**
+
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot))
+    Sl[Slider]  --> Sc 
+  Sl --> M((Dist Plot))
+  linkStyle 0 display:none
+  linkStyle 1 display:none
+  linkStyle 2 display:none
+```
+
+**Calculate scatter plot**
+
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot)):::changed
+    Sl[Slider]  --> Sc 
+  Sl --> M((Dist Plot))
+  linkStyle 0 display:none
+  linkStyle 1 display:none
+  linkStyle 2 display:none
+  classDef changed fill:#f96
+```
+
+**Calculate scatter plot**
+
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot)):::changed
+    Sl[Slider]  --> Sc 
+  Sl --> M((Dist Plot))
+  linkStyle 2 display:none
+  classDef changed fill:#f96
+```
+
+**Calculate distribution**
+
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot))
+    Sl[Slider]  --> Sc 
+  Sl --> M((Dist Plot)):::changed
+  linkStyle 2 display:none
+  classDef changed fill:#f96
+```
+
+**Calculate distribution**
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot))
+    Sl[Slider]  --> Sc 
+  Sl --> M((Dist Plot)):::changed
+  classDef changed fill:#f96
+```
+
+
+**Reactive graph**
+
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot))
+    Sl[Slider]  --> Sc 
+  Sl --> M((Dist Plot))
+```
+
+
+**Slider changes**
+
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot))
+  Sl[Slider]:::changed --> Sc 
+  Sl --> M((Dist Plot))
+  
+  classDef changed fill:#f96
+```
+
+**Invalidated**
+
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot)):::changed
+  Sl[Slider]:::changed --> Sc 
+  Sl --> M((Dist Plot)):::changed
+  
+  classDef changed fill:#f96
+```
+
+**Forget dependencies**
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot))
+  Sl[Slider] --> Sc 
+  Sl --> M((Dist Plot))
+  
+  classDef changed fill:#f96
+  linkStyle 0 display:none
+  linkStyle 1 display:none
+  linkStyle 2 display:none
+```
+
+**Recalculate**
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot)):::changed
+  Sl[Slider] --> Sc 
+  Sl --> M((Dist Plot))
+  
+  classDef changed fill:#f96
+  linkStyle 0 display:none
+  linkStyle 1 display:none
+  linkStyle 2 display:none
+```
+
+**Recalculate**
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot)):::changed
+  Sl[Slider] --> Sc 
+  Sl --> M((Dist Plot))
+  
+  classDef changed fill:#f96
+  linkStyle 2 display:none
+```
+
+
+**Recalculate**
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot))
+  Sl[Slider] --> Sc 
+  Sl --> M((Dist Plot)):::changed
+  
+  classDef changed fill:#f96
+  linkStyle 2 display:none
+```
+
+**Recalculate**
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot))
+  Sl[Slider] --> Sc 
+  Sl --> M((Dist Plot)):::changed
+  
+  classDef changed fill:#f96
+```
+
+**Updated**
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot))
+  Sl[Slider] --> Sc 
+  Sl --> M((Dist Plot))
+  
+  classDef changed fill:#f96
+```
+
+**Checkbox changes**
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox]:::changed --> Sc((Scatter\nPlot))
+  Sl[Slider] --> Sc 
+  Sl --> M((Dist Plot))
+  
+  classDef changed fill:#f96
+```
+
+**Invalidated**
+
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox]:::changed --> Sc((Scatter\nPlot)):::changed
+  Sl[Slider] --> Sc 
+  Sl --> M((Dist Plot))
+  
+  classDef changed fill:#f96
+```
+
+**Forget dependencies**
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot)):::changed
+  Sl[Slider] --> Sc 
+  Sl --> M((Dist Plot))
+  
+  classDef changed fill:#f96
+  linkStyle 0 display:none
+  linkStyle 1 display:none
+```
+
+**Recalculate**
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot)):::changed
+  Sl[Slider] --> Sc 
+  Sl --> M((Dist Plot))
+  
+  classDef changed fill:#f96
+  linkStyle 0 display:none
+  linkStyle 1 display:none
+```
+
+**Recalculate**
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot)):::changed
+  Sl[Slider] --> Sc 
+  Sl --> M((Dist Plot))
+  
+  classDef changed fill:#f96
+```
+
+**Updated**
+```{mermaid}
+%%| fig-width: 6
+flowchart TD
+  C[Checkbox] --> Sc((Scatter\nPlot))
+  Sl[Slider] --> Sc 
+  Sl --> M((Dist Plot))
+  
+  classDef changed fill:#f96
+```
+
+**How do other frameworks work?**
+
+- Streamlit: re-render everything everywhere all the time
+- Dash/Panel/Gradio: Define callback functions
+- PowerBI can do individual plots and widgets but graphics are ugly
+
+
+
+## Reactive elements
+
+**Consider this Shiny app below:**
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(webexercises)
+```
+
+:::{.column-page}
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 600
+#| components: [editor, viewer]
+
+library(tidyverse)
+library(shiny)
+
+data = tidyr::billboard %>% 
+  gather(key = "week", value = "position", starts_with("wk")) %>% 
+  mutate(week = as.numeric(gsub("wk", "", week)))
+
+ui = fluidPage(
+  titlePanel("Billboard song ranking"),
+  
+  selectInput("song_selector", "Select a Song:", choices = unique(data$track)),
+  
+  # Plot output
+  plotOutput("position_plot")
+  
+)
+server = function(input, output) {
+  
+  # Render the plot
+  output$position_plot <- renderPlot({
+    
+    # Filter data based on user selection
+    selected_song_data <- reactive({
+      filter(data, track == input$song_selector)
+    })
+    
+    ggplot(selected_song_data(), aes(x = week, y = position)) +
+      geom_line() +
+      labs(title = paste("Position of", input$song_selector, "over Weeks"),
+           x = "Week",
+           y = "Position") +
+      scale_y_reverse(limits = c(100, 0))
+  })
+}
+
+# Create Shiny app ----
+shinyApp(ui = ui, server = server)
+
+```
+
+:::
+The reactive elements in this app are outlined in the UI elements in the script:
+
+Inputs:
+- `selectInput("song_selector", "Select a Song:", choices = unique(data$track))`
+
+Outputs:
+- `plotOutput("position_plot")`
+
+![](images/InputOutput.png){fig-align="center" width="70%"} 
+
+
+
+The logic behind those elements are defined in the server:
+
+
+```r
+# Render the plot
+output$position_plot <- renderPlot({
+
+# Filter data based on user selection
+selected_song_data <- reactive({
+filter(data, track == input$song_selector)
+})
+
+ggplot(selected_song_data(), aes(x = week, y = position)) +
+geom_line() +
+labs(title = paste("Position of", input$song_selector, "over Weeks"),
+x = "Week",
+y = "Position") +
+scale_y_reverse(limits = c(100, 0))
+})
+}
+```
+
+![](images/InputLogic.png){fig-align="center" width="70%"} 
+
+## Adding in another input:
+
+UI:
+```r
+sliderInput("week_no", "Week", min = 0 , max = 52, value = c(0,52)),
+```
+
+Server:
+```r
+selected_song_data <- reactive({
+filter(data, track == input$song_selector &
+week >= input$week_no[1] &
+week <= input$week_no[2])
+})
+```
+:::{.column-page}
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 600
+#| components: [editor, viewer]
+
+library(tidyverse)
+library(shiny)
+
+data = tidyr::billboard %>% 
+  gather(key = "week", value = "position", starts_with("wk")) %>% 
+  mutate(week = as.numeric(gsub("wk", "", week)),
+         month_entered = strftime(date.entered, "%B"))
+
+ui = fluidPage(
+  titlePanel("Billboard song ranking"),
+  
+  selectInput("song_selector", "Select a Song:", choices = unique(data$track)),
+  sliderInput("week_no", "Week", min = 0 , max = 52, value = c(0,52)),
+  
+  # Plot output
+  plotOutput("position_plot")
+  
+)
+server = function(input, output) {
+  
+  # Render the plot
+  output$position_plot <- renderPlot({
+    
+    # Filter data based on user selection
+    selected_song_data <- reactive({
+      filter(data, track == input$song_selector &
+               week >= input$week_no[1] &
+               week <= input$week_no[2])
+    })
+    
+    ggplot(selected_song_data(), aes(x = week, y = position)) +
+      geom_line() +
+      labs(title = paste("Position of", input$song_selector, "over Weeks"),
+           x = "Week",
+           y = "Position") +
+      scale_y_reverse(limits = c(100, 0))
+  })
+}
+
+# Create Shiny app ----
+shinyApp(ui = ui, server = server)
+
+```
+
+:::
+
+
+### Question:
+**What does our reactive graph look like now?**
+
+::: {.callout-tip collapse="true"}
+### Answer:
+
+![](images/SliderGraph.png){fig-align="center" width="70%"} 
+
+:::
+
+
+
+### Exercise 1:
+
+**1.1 If you were to add a table that displays the week by week position of the song that was *not* affected by the month slider, what would the graph look like? **
+
+::: {.callout-tip collapse="true"}
+### Answer:
+
+![](images/TableAdd.png){fig-align="center" width="70%"} 
+
+:::
+
+
+Using the code below, add a table that displays the week by week position of the song. 
+
+**Tip:**Use `renderTable()` and `tableOutput()`.
+
+
+:::{.column-page}
+
+::: {.panel-tabset}
+
+## Goal
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 600
+#| components: [viewer]
+
+library(tidyverse)
+library(shiny)
+
+data = tidyr::billboard %>% 
+  gather(key = "week", value = "position", starts_with("wk")) %>% 
+  mutate(week = as.numeric(gsub("wk", "", week)),
+         month_entered = strftime(date.entered, "%B"))
+
+ui = fluidPage(
+  titlePanel("Billboard song ranking"),
+  
+  selectInput("song_selector", "Select a Song:", choices = unique(data$track)),
+  sliderInput("week_no", "Week", min = 0 , max = 52, value = c(0,52)),
+  
+  # Plot output
+  plotOutput("position_plot"),
+  tableOutput("table")
+  
+)
+server = function(input, output) {
+  
+  # Render the plot
+  output$position_plot <- renderPlot({
+    
+    # Filter data based on user selection
+    selected_song_data <- reactive({
+      filter(data, track == input$song_selector &
+               week >= input$week_no[1] &
+               week <= input$week_no[2])
+    })
+    
+    ggplot(selected_song_data(), aes(x = week, y = position)) +
+      geom_line() +
+      labs(title = paste("Position of", input$song_selector, "over Weeks"),
+           x = "Week",
+           y = "Position") +
+      scale_y_reverse(limits = c(100, 0))
+  })
+  
+  # Render the plot
+  output$table <- renderTable({
+    
+    # Filter data based on user selection
+    selected_song_data <- reactive({
+      filter(data, track == input$song_selector)
+    })
+    
+    
+    selected_song_data()
+    
+  })
+  
+  
+}
+
+# Create Shiny app ----
+shinyApp(ui = ui, server = server)
+
+```
+
+## Problem
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 600
+#| components: [editor, viewer]
+
+library(tidyverse)
+library(shiny)
+
+data = tidyr::billboard %>% 
+  gather(key = "week", value = "position", starts_with("wk")) %>% 
+  mutate(week = as.numeric(gsub("wk", "", week)),
+         month_entered = strftime(date.entered, "%B"))
+
+ui = fluidPage(
+  titlePanel("Billboard song ranking"),
+  
+  selectInput("song_selector", "Select a Song:", choices = unique(data$track)),
+  sliderInput("week_no", "Week", min = 0 , max = 52, value = c(0,52)),
+  
+  # Plot output
+  plotOutput("position_plot")
+  
+)
+server = function(input, output) {
+  
+  # Render the plot
+  output$position_plot <- renderPlot({
+    
+    # Filter data based on user selection
+    selected_song_data <- reactive({
+      filter(data, track == input$song_selector &
+               week >= input$week_no[1] &
+               week <= input$week_no[2])
+    })
+    
+    ggplot(selected_song_data(), aes(x = week, y = position)) +
+      geom_line() +
+      labs(title = paste("Position of", input$song_selector, "over Weeks"),
+           x = "Week",
+           y = "Position") +
+      scale_y_reverse(limits = c(100, 0))
+  })
+  
+}
+
+# Create Shiny app ----
+shinyApp(ui = ui, server = server)
+
+```
+
+::: 
+:::
+
+## Reactive values
+
+Reactive values exist in between sources (e.g. an input) and endpoints (e.g. an output).
+
+A `reactive()` depends on various upstream inputs and can be used to generate output.
+
+Their primary use is similar to a function in an R script, they help to
+
+- avoid repeating yourself
+
+- decompose complex computations into smaller / more modular steps
+
+- can improve computational efficiency by breaking up / simplifying reactive dependencies
+
+Have a look at our example from the exercise above, can you see how `filter(data, track == input$song_selector)` was called twice in each of the render functions? 
+
+## `reactive()` tips
+
+- If `reactive_object <- reactive({...})` then you can only access or use  `reactive_object` downstream using`react_obj()` and *not* `react_obj`.
+- think of `react_obj()` as a function that returns the current value
+- Common cause of ~~everyone's~~ my favorite R error:
+
+``` 
+## Error: object of type 'closure' is not subsettable`
+```
+
+-  `input$XXX` reactive expressions may only be used within a reactive context (e.g. `render*()`, `reactive()`, `observer()`, etc.) otherwise you get this other common error:
+
+```
+## Error: Operation not allowed without an active reactive context. (You tried to do something that can only be done from inside a reactive expression or observer.)
+```
+
+### Exercise 2:
+Create a ```reactive()``` intermediate data frame so that it doesn't have to be loaded twice when creating the two outputs.
+
+Instead of this: 
+
+![](images/TableAdd.png){fig-align="center" width="70%"} 
+
+We will have this:
+
+![](images/ReactiveValue.png){fig-align="center" width="90%"} 
+
+:::{.column-page}
+
+::: {.panel-tabset}
+
+## Problem
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 600
+#| components: [editor,viewer]
+
+library(tidyverse)
+library(shiny)
+
+data = tidyr::billboard %>% 
+  gather(key = "week", value = "position", starts_with("wk")) %>% 
+  mutate(week = as.numeric(gsub("wk", "", week)),
+         month_entered = strftime(date.entered, "%B"))
+
+ui = fluidPage(
+  titlePanel("Billboard song ranking"),
+  
+  selectInput("song_selector", "Select a Song:", choices = unique(data$track)),
+  sliderInput("week_no", "Week", min = 0 , max = 52, value = c(0,52)),
+  
+  # Plot output
+  plotOutput("position_plot"),
+  tableOutput("table")
+  
+)
+server = function(input, output) {
+  
+  # Render the plot
+  output$position_plot <- renderPlot({
+    
+    # Filter data based on user selection
+    selected_song_data <- reactive({
+      filter(data, track == input$song_selector &
+               week >= input$week_no[1] &
+               week <= input$week_no[2])
+    })
+    
+    ggplot(selected_song_data(), aes(x = week, y = position)) +
+      geom_line() +
+      labs(title = paste("Position of", input$song_selector, "over Weeks"),
+           x = "Week",
+           y = "Position") +
+      scale_y_reverse(limits = c(100, 0))
+  })
+  
+  # Render the plot
+  output$table <- renderTable({
+    
+    # Filter data based on user selection
+    selected_song_data <- reactive({
+      filter(data, track == input$song_selector)
+    })
+    
+    
+    selected_song_data()
+    
+  })
+  
+  
+}
+
+# Create Shiny app ----
+shinyApp(ui = ui, server = server)
+
+```
+
+## Solution
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 600
+#| components: [editor, viewer]
+
+library(tidyverse)
+library(shiny)
+
+data = tidyr::billboard %>% 
+  gather(key = "week", value = "position", starts_with("wk")) %>% 
+  mutate(week = as.numeric(gsub("wk", "", week)),
+         month_entered = strftime(date.entered, "%B"))
+
+ui = fluidPage(
+  titlePanel("Billboard song ranking"),
+  
+  selectInput("song_selector", "Select a Song:", choices = unique(data$track)),
+  sliderInput("week_no", "Week", min = 0 , max = 52, value = c(0,52)),
+  
+  # Plot output
+  plotOutput("position_plot"),
+  tableOutput('table')
+  
+)
+server = function(input, output) {
+  
+  filtered_df <- reactive({
+    data %>% 
+      filter(track == input$song_selector)
+  })
+  
+  # Render the plot
+  output$position_plot <- renderPlot({
+    
+    # Filter data based on user selection
+    selected_song_data <- reactive({
+      filter(filtered_df(), 
+             week >= input$week_no[1] & week <= input$week_no[2])
+    })
+    
+    ggplot(selected_song_data(), aes(x = week, y = position)) +
+      geom_line() +
+      labs(title = paste("Position of", input$song_selector, "over Weeks"),
+           x = "Week",
+           y = "Position") +
+      scale_y_reverse(limits = c(100, 0))
+  })
+  
+  
+    # Render the plot
+  output$table <- renderTable({
+    
+    filtered_df()
+    
+  })
+  
+}
+
+# Create Shiny app ----
+shinyApp(ui = ui, server = server)
+
+```
+
+::: 
+
+:::
+
+## `observe()`
+
+These are constructed in the same way as a `reactive()` however an observer does not return a value, rather they are used for their "side effects".
+
+* The side effects can involve sending data to the client browser, e.g. updating a UI element
+
+* Because `observe()` is used for its side effects, you will never see `XXX <- observe()` because `observe()` will never produce a value!
+
+So key thing to remember: `reactive()` produces things, `observe()` does things. 
+
+
+Some examples when you would use observe:
+
+- logging user actions
+
+- updating a drop down list, based on data that has been loaded
+
+### A basic example:
+
+:::{.column-page}
+::: {.panel-tabset}
+
+
+## Without using `observe()` 
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 600
+#| components: [editor, viewer]
+
+
+library(shiny)
+library(dplyr)
+
+Letter <- c("A","A","A","B","B","B","C","C","C")
+Sub_category <- (c("A1","A2","A3","B1","B2","B3","C1","C2","C3"))
+data <- data.frame(Letter, Sub_category)
+
+ui <- fluidPage(
+  selectInput(inputId = "letter", label = "Letter:", choices = data$Letter, selected = data$Letter[1]),
+  selectInput(inputId = "sub", label = "Sub Category:", choices = data$Sub_category, selected = data$Sub_category[1])
+)
+
+server <- function(input, output, session) {
+
+}
+
+shinyApp(ui = ui, server = server)
+
+```
+
+
+## Using `observe()` 
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 600
+#| components: [editor, viewer]
+
+
+library(shiny)
+library(dplyr)
+
+Letter <- c("A","A","A","B","B","B","C","C","C")
+Sub_category <- (c("A1","A2","A3","B1","B2","B3","C1","C2","C3"))
+data <- data.frame(Letter, Sub_category)
+
+ui <- fluidPage(
+  selectInput(inputId = "letter", label = "Letter:", choices = data$Letter, selected = data$Letter[1]),
+  selectInput(inputId = "sub", label = "Sub Category:", choices = data$Sub_category, selected = data$Sub_category[1])
+)
+
+server <- function(input, output, session) {
+  observe({
+    sub_cat_vals <- data %>% filter(Letter == input$letter) %>% select(Sub_category)
+    
+    updateSelectInput(
+      session = session, 
+      inputId = "sub",
+      choices = sub_cat_vals,
+      selected = head(sub_cat_vals, 1)
+    )
+  })
+}
+
+shinyApp(ui = ui, server = server)
+
+```
+
+:::
+:::
+
+
+
+So how can we use `observe()` in our previous example? Take a look at the code below:
+
+:::{.column-page}
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 600
+#| components: [editor, viewer]
+
+library(tidyverse)
+library(shiny)
+
+data = tidyr::billboard %>% 
+  gather(key = "week", value = "position", starts_with("wk")) %>% 
+  mutate(week = as.numeric(gsub("wk", "", week)),
+         month_entered = strftime(date.entered, "%B"))
+
+ui = fluidPage(
+  titlePanel("Billboard song ranking"),
+  selectInput("artist_selector", "Select an Artist:", choices = unique(data$artist)),
+  selectInput("song_selector", "Select a Song:", choices = unique(data$track)),
+  sliderInput("week_no", "Week", min = 0 , max = 52, value = c(0,52)),
+  
+  # Plot output
+  plotOutput("position_plot"),
+  tableOutput('table')
+  
+)
+server = function(input, output) {
+  
+  filtered_df <- reactive({
+    req(input$song_selector)
+    data %>% 
+      filter(track == input$song_selector)
+  })
+  
+  observe({
+    songs = data %>% 
+      filter(artist == input$artist_selector) %>% 
+      pull(track) %>% 
+      unique() %>% 
+      sort()
+    
+    updateSelectInput(
+      inputId = "song_selector", 
+      choices = songs
+    )
+  })
+  
+  # Render the plot
+  output$position_plot <- renderPlot({
+    
+    # Filter data based on user selection
+    selected_song_data <- reactive({
+      filter(filtered_df(), 
+             week >= input$week_no[1] & week <= input$week_no[2])
+    })
+    
+    ggplot(selected_song_data(), aes(x = week, y = position)) +
+      geom_line() +
+      labs(title = paste("Position of", input$song_selector, "over Weeks"),
+           x = "Week",
+           y = "Position") +
+      scale_y_reverse(limits = c(100, 0))
+  })
+  
+  
+  # Render the plot
+  output$table <- renderTable({
+    
+    filtered_df()
+    
+  })
+  
+}
+
+# Create Shiny app ----
+shinyApp(ui = ui, server = server)
+
+```
+
+:::
+
+This observe block monitors changes in the selected artist (`input$artist_selector`). When a change occurs, it filters, processes, and sorts the corresponding track names from the dataset. Then, it dynamically updates the choices available in a `selectInput` song selector widget based on the unique and sorted track names associated with the selected artist.
+
+So TLDR: `observe()` continually monitors for changes in the reactive change and does the action prescribed (which in this case was updating another selector).
+
+Because of `observe()` is always constantly monitoring for changes in the environment, and `reactive()` values only ever gets changed if an input is changed, `reactive()` is known to be 'lazy'.
+
+![](images/Observer.png){fig-align="center" width="70%"} 
+
+## Quick quiz
+
+### In these scenarios below, would you use `reactive()` or `observe()`?
+
+**Writing a CSV** 
+
+::: {.callout-tip collapse="true"}
+## Answer:
+
+`observe()`
+:::
+
+
+**Querying a database**
+
+::: {.callout-tip collapse="true"}
+## Answer:
+
+`react()`
+:::
+
+**Adding two numbers**
+
+::: {.callout-tip collapse="true"}
+## Answer:
+
+`react()`
+:::
+
+**A function which prints to the console**
+
+::: {.callout-tip collapse="true"}
+## Answer:
+
+`observe()`
+:::
+
+**Fetching the current temperature from an API**
+
+::: {.callout-tip collapse="true"}
+## Answer:
+
+`react()`
+:::
+
+**A function which sorts a list in place**
+
+::: {.callout-tip collapse="true"}
+## Answer:
+
+`observe()`
+:::
+
+**Getting a model score for a set of inputs**
+
+::: {.callout-tip collapse="true"}
+## Answer:
+
+`react()`
+:::
+
+**Getting a model score for a set of inputs**
+
+::: {.callout-tip collapse="true"}
+## Answer:
+
+`observe()`
+:::
+
+## Reactlog
+
+`reactlog` is a package that can help you understand the reactive chains in your app.
+
+You can use it by running the following script:
+
+```r
+
+library(shiny)
+library(reactlog)
+
+# tell shiny to log all reactivity
+reactlog_enable()
+
+# run a shiny app
+runApp('app.R')
+
+# once app has closed, display reactlog from shiny
+shiny::reactlogShow()
+
+```
+
+## Other tips:
+
+- because reactivity does not determine *when* calculations happen, things can load at different times - i.e. the Shiny app might attempt to render tables and the UI before oauth and a DB connection is established resulting in some unsightly error messages. 
+- Use `req()` in your server functions to outline the values/objects required before the value is calculated. 
+i.e. `req(input$slider)` means 'don't run the next bit of code unless there is a value in the slider input!'
+
+
+## Getting started with your first app
+
+### Planning your Shiny app is THE most important thing you can do. 
+
+## Gathering requirements:
+-   Are the requirements vague or specific?
+-   remember to ask: **is it necessary?** (do we need it all?!) 
+
+- ***You are the data professional - your input still matters!***
+
+## Appropriate graphics:
+-   Multiple lines
+-   Bar vs line
+-   Use of gradients
+
+## Appropriate widgets:
+-   Checkbox vs radio boxes
+-   Drop down vs free text
+-   Hardcoded drop down options vs using `observe()` to update input options
+-   Calendar select widget...etc
+-   Unneccesary buttons
+-   Grab inspo from existing forms
+
+## How do these inputs interact with the graphics?
+-   One to one
+    - e.g. A filter might affect one graph on the dash only.
+-   One to many
+    - e.g. A filter might be global, and impact all figures on a dash.
+-   Rule of thumb: K.I.S.S
+
+## WIREFRAMING
+-   map what it looks like
+-   what interacts with what
+
+## Wireframe examples:
+
+::: {layout-nrow=2}
+
+![Low fidelity wireframe](images/lofi-wireframe.JPG){fig-align="center" width="40%"}
+![High fidelity wireframe](images/hifi-wireframe.png){fig-align="center" width="40%"}
+
+
+
+## An exercise for the brave:
+
+Build a Shiny App using the Supermarket Sales data set available [here](https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales).
+
+**You app must have the following:**
+
+
+Inputs:
+
+* Ability to select branch
+* Ability to select the location (options will show depending on the branch)
+* Ability to select customer type
+* From & to date
+
+Outputs:
+
+* Line graph showing $ amount sold per day (remember to multiple quantity by price to get the amount)
+* A simple bar graph showing different in dollar amount spent between men and women
+* A table showing dollar amount spent by product type.
+
+
+Don't worry too much about theming for now. But remember the foundations: 
+
+* wireframing
+* reactive graphs (if it helps)
+* reactive values so that you don't repeat yourself
+
+Reach out if you need tips/troubleshooting! 
+
+

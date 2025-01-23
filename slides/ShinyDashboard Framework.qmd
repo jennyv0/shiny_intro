@@ -1,0 +1,422 @@
+---
+title: "ShinyDashboard Framework"
+format: 
+  html:
+    resources: 
+      - shinylive-sw.js
+filters:
+- shinylive
+---
+
+```{r setup}
+#| include: false
+library(shiny)
+```
+
+## shinydashboard
+
+is a package that enables the easy generation of [bootstrap](https://getbootstrap.com/) based dynamic Shiny dashboards.
+
+The core of the package is a common dashboard layout and a number of specialized UI elements (static and reactive) for creating an attractive interface.
+
+![](images/shinydashboard_layout.png){fig-align="center" width="40%"}
+
+## Bootstrap
+
+-   collection of HTML conventions, CSS styles, and JS snippets bundled up into a convenient form.
+-   framework originally developed for Twitter and over the last 10 years has grown to become one of the most popular CSS frameworks used on the web.
+-   Basic themes available [here](https://bootswatch.com/).
+
+## Dashboard basics
+
+```{r}
+#| eval: false
+#| echo: true
+#| code-line-numbers: "|5-11|5,11|6-8|9|10"
+
+library(shiny)
+library(shinydashboard)
+
+shinyApp(
+  ui = dashboardPage(
+    dashboardHeader(
+      title="shinydashboard"
+    ),
+    dashboardSidebar(),
+    dashboardBody()
+  ),
+  server = function(input, output, session) {
+  }
+)
+```
+
+## Dashboard header
+
+This is a container for the `title` and any `dropdownMenu()`s
+
+-   the latter are somewhat limited, support "messages", "notifications", "tasks" types
+
+-   Dynamic menus can be generated using `dropdownMenuOutput()` and `renderMenu()` in the ui and server respectively.
+
+::: r-stack
+::: {.fragment .fade-in-then-out}
+Messages:
+
+![](images/shinydashboard_menu-messages.png){width="900"}
+:::
+
+::: {.fragment .fade-in-then-out}
+Notifications:
+
+![](images/shinydashboard_menu-notifications.png){width="900"}
+:::
+
+::: {.fragment .fade-in-then-out}
+Tasks:
+
+![](images/shinydashboard_menu-tasks.png){width="900"}
+:::
+:::
+
+## Dashboard sidebar
+
+This functions in the same way as the `sidebarPanel()` in `sidebarLayout()`, allowing for the inclusion of inputs and any other html content.
+
+Alternatively, it can also function as a `tabPanel()` like menu.
+
+-   instead of `tabsetPanel()` we use `sidebarMenu()`,
+
+-   text and icons are assigned using `menuItem()`
+
+-   the panels being activated are contained in the body and not the sidebar
+
+    -   their UI code goes under `dashboardBody()` using `tabItems()` and `tabItem()`.
+
+    -   `menuItem()`s are connected to `tabItems()` via matching the `tabName` arguments.
+
+## Demo - `sidebarMenu()`
+
+### Use the provided `weather.csv` file and run the following script:
+
+```{r}
+#| eval: false
+#| echo: true
+#| code-line-numbers: "|18-39|19-26|27-37|39-50|42,30|35,46|52-71"
+
+library(tidyverse)
+library(shiny)
+library(shinydashboard)
+
+ggplot2::theme_set(ggplot2::theme_bw())
+
+d = readr::read_csv(here::here("data/weather.csv"))
+
+d_vars = d |>
+  select(where(is.numeric)) |>
+  names()
+
+shinyApp(
+  ui = dashboardPage(
+    dashboardHeader(
+      title="shinydashboard"
+    ),
+    dashboardSidebar(
+      selectInput(
+        "city", "Select a city",
+        choices = c("Chicago", "Durham", "Sedona", "New York", "Los Angeles")
+      ),
+      selectInput(
+        "var", "Select a variable",
+        choices = d_vars, selected = "humidity"
+      ),
+      sidebarMenu(
+        menuItem(
+          "Temperature", 
+          tabName = "temp", 
+          icon = icon("thermometer-half")
+        ),
+        menuItem(
+          "Other", 
+          tabName = "other"
+        )
+      )
+    ),
+    dashboardBody(
+      tabItems(
+        tabItem(
+          "temp", 
+          plotOutput("plot_temp")
+        ),
+        tabItem(
+          "other", 
+          plotOutput("plot_other")
+        )
+      )
+    )
+  ),
+  server = function(input, output, session) {
+    d_city = reactive({
+      d |>
+        filter(city %in% input$city)
+    })
+    
+    output$plot_temp = renderPlot({
+      d_city() |>
+        ggplot(aes(x=time, y=temp)) +
+        ggtitle("Temperature") +
+        geom_line()
+    })
+    
+    output$plot_other = renderPlot({
+      d_city() |>
+        ggplot(aes(x=time, y=.data[[input$var]])) +
+        ggtitle(input$var) +
+        geom_line()
+    })
+  }
+)
+
+
+```
+
+## Demo - Dynamic `sidebarMenu()`
+
+```{r}
+#| eval: false
+#| echo: true
+#| code-line-numbers: "|27|43-48"
+
+library(tidyverse)
+library(shiny)
+library(shinydashboard)
+
+ggplot2::theme_set(ggplot2::theme_bw())
+
+d = readr::read_csv(here::here("data/weather.csv"))
+
+d_vars = d |>
+  select(where(is.numeric)) |>
+  names()
+
+shinyApp(
+  ui = dashboardPage(
+    dashboardHeader(
+      title="shinydashboard"
+    ),
+    dashboardSidebar(
+      selectInput(
+        "city", "Select a city",
+        choices = c("Chicago", "Durham", "Sedona", "New York", "Los Angeles")
+      ),
+      selectInput(
+        "var", "Select a variable",
+        choices = d_vars, selected = "humidity"
+      ),
+      sidebarMenuOutput("menu")
+    ),
+    dashboardBody(
+      tabItems(
+        tabItem(
+          "temp", 
+          plotOutput("plot_temp")
+        ),
+        tabItem(
+          "other", 
+          plotOutput("plot_other")
+        )
+      )
+    )
+  ),
+  server = function(input, output, session) {
+    output$menu = renderMenu(
+      sidebarMenu(
+        menuItem("Temperature", tabName = "temp", icon = icon("thermometer-half")),
+        menuItem(input$var, tabName = "other")
+      )
+    )
+    
+    d_city = reactive({
+      d |>
+        filter(city %in% input$city)
+    })
+    
+    output$plot_temp = renderPlot({
+      d_city() |>
+        ggplot(aes(x=time, y=temp)) +
+        ggtitle("Temperature") +
+        geom_line()
+    })
+    
+    output$plot_other = renderPlot({
+      d_city() |>
+        ggplot(aes(x=time, y=.data[[input$var]])) +
+        ggtitle(input$var) +
+        geom_line()
+    })
+  }
+)
+
+```
+
+## Body building blocks
+
+::: columns
+::: {.column width="50%"}
+### `box()`
+
+![](images/shinydashboard_box.png){fig-align="center" width="80%"} ![](images/shinydashboard_box2.png){fig-align="center" width="80%"}
+:::
+
+::: {.column width="50%"}
+### `infoBox()`
+
+![](images/shinydashboard_infobox.png){fig-align="center" width="90%"}
+
+<br/>
+
+### `valueBox()`
+
+![](images/shinydashboard_valuebox.png){fig-align="center" width="90%"}
+:::
+:::
+
+## Colors
+
+The color of the various boxes is specified via `status` or `background` for `box()` or `color` for the others.
+
+Available options include,
+
+```{r}
+shinydashboard:::validStatuses
+```
+
+<br/>
+
+```{r}
+shinydashboard:::validColors
+```
+
+## Body layout
+
+::: small
+The layout of box elements on a dashboard is controlled by combining `fluidRow()` and `column()` (as is standard with regular shiny apps)
+
+-   this layout is based on a page having width of 12 units
+
+-   `column()` and `box()` elements take a `width` argument using these units
+:::
+
+::: r-stack
+::: {.fragment .fade-in-then-out}
+Row-based layout
+
+::: columns
+::: {.column width="50%"}
+![](images/shinydashboard_layout-mixed.png){fig-align="center" width="400"}
+:::
+
+::: {.column .small width="50%"}
+``` r
+dashboardBody(
+  fluidRow(
+    box(title = "Box title", ...),
+    box(...)
+  ),
+
+  fluidRow(
+    box(title = "Title 1", ...),
+    box(title = "Title 2", ...),
+    box(title = "Title 3", ...)
+  ),
+
+  fluidRow(
+    box(...),
+    box(title = "Title 5", ...),
+    box(title = "Title 6", ...)
+  )
+)
+```
+:::
+:::
+:::
+
+::: {.fragment .fade-in-then-out}
+Column-based layout
+
+::: columns
+::: {.column width="50%"}
+![](images/shinydashboard_layout-cols.png){fig-align="center" width="400"}
+:::
+
+::: {.column .small width="50%"}
+``` r
+dashboardBody(
+  fluidRow(
+    column(width = 4,
+      box(title = "Box title", ...),
+      box(title = "Title 1", ...),
+      box(...)
+    ),
+    column(width = 4,
+      box(...),
+      box(title = "Title 3", ...),
+      box(title = "Title 5", ...)
+    ),
+    column(width = 4,
+      box(title = "Title 2", ...),
+      box(title = "Title 6", ...)
+    )
+  )
+)
+```
+:::
+:::
+:::
+
+::: {.fragment .fade-in-then-out}
+Mixed layout
+
+::: columns
+::: {.column width="50%"}
+![](images/shinydashboard_layout-mixed.png){fig-align="center" width="400"}
+:::
+
+::: {.column .small width="50%"}
+``` r
+dashboardBody(
+  fluidRow(
+    box(title = "Box title", ...),
+    box(...)
+  ),
+  fluidRow(
+    column(width = 4,
+      box(title = "Title 1", ...),
+      box(...)
+    ),
+    column(width = 4,
+      box(title = "Title 3", ...),
+      box(title = "Title 5", ...)
+    ),
+    column(width = 4,
+      box(title = "Title 2", ...),
+      box(title = "Title 6", ...)
+    )
+  )
+)
+```
+:::
+:::
+:::
+:::
+
+## `bs4dash`
+
+From [`bs4dash` documentation](https://rinterface.github.io/bs4Dash/articles/bs4Dash.html):
+
+`bs4Dash` relies on the same basis as `shinydashboard`, that is the AdminLTE HTML template, except the version is higher (3.1.0 vs 2.4). The biggest difference is the dependence on Bootstrap 4, which is not natively supported by {Shiny}. That’s why elements like tabsetPanel(), actionButton(), … have been rewritten to provide full Bootstrap4 support. In addition, bs4Dash comes with extra elements that will help you to develop Shiny apps with a more professional look and feel.
+
+All features are summarised on the website.
+
+A `bs4dash` demo is available [here](https://dgranjon.shinyapps.io/bs4DashDemo).
+
+The code used to produce the demo is available [here](https://github.com/RinteRface/bs4Dash/tree/master/inst/examples/showcase).

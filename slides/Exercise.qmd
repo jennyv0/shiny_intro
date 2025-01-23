@@ -1,0 +1,18 @@
+---
+title: "Homework"
+format: 
+  html:
+    resources: 
+      - shinylive-sw.js
+filters:
+- shinylive
+---
+
+
+## Exercise:
+
+Using the shiny app that you built last week, use the `shinydashboard`framework to create a new dashboard.
+
+*Extra challenge:* Turn it into a `flexdashboard` with a shiny run time.
+
+Try to add new features and plots using some of the extensions mentioned in today's session!

@@ -1,0 +1,37 @@
+project:
+  type: website
+
+website:
+  title: "Intro to Shiny"
+  sidebar:
+    contents:
+      - section: "Structure of today"
+        contents:
+          - index.qmd
+      - section: "Getting Started"
+        contents:
+          # - slides/Planning Your Shiny App.qmd
+          - slides/Basic Structure of a Shiny App.qmd
+          - slides/Reactivity.qmd
+      - section: "Layouts and Dash Frameworks"
+        contents:
+          - slides/Shiny Layout Fundamentals.qmd
+          - slides/FlexDashboard Framework.qmd
+          - slides/ShinyDashboard Framework.qmd
+          - slides/Widgets.qmd
+          - slides/Exercise.qmd
+      - section: "Aesthetics"
+        contents:
+          - slides/bslib.qmd
+          - slides/Theming - basics of CSS and HTML for Shiny.qmd
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+

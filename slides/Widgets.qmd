@@ -1,0 +1,157 @@
+---
+title: "Other cool things you can do with Shiny"
+format: 
+  html:
+    resources: 
+      - shinylive-sw.js
+filters:
+- shinylive
+---
+
+## Awesome Shiny Extensions
+
+This comprehensive curated list of [Awesome SHiny Extensions](https://github.com/nanxstats/awesome-shiny-extensions?tab=readme-ov-file#notebooks) is a good source for cool widgets and extensions to take your Shiny app to the next level!
+
+**Tip:** It is easy to get carried away with all the little fun things that Shiny has to offer! Remember to keep track of time for your project, and not allow them to distract you from the final product!
+
+Below are a few highlights:
+
+### Other dashboard frameworks
+
+#### `argonDash`
+
+![](images/argonDashDemo.png){fig-align="center" width="80%"}
+
+#### `tablerDash`
+
+![](images/tablerDash.png){fig-align="center" width="80%"}
+
+### Layout features
+
+#### `fullPage`
+
+![](images/fullPage.gif){fig-align="center" width="80%"}
+
+
+#### `gridPage`
+
+Works similarly to `fluidPage()` in another grid type format.
+
+![](images/gridPage.png){fig-align="center" width="80%"}
+
+### UI Components
+
+#### `slickR`
+
+Great option for carousels!
+
+![](images/slickR.gif){fig-align="center" width="80%"}
+
+#### `shinyWidgets` 
+
+A library of nicer looking widgets than the native built in widgets you get with the `shiny` package. 
+A full demo of the library is available [here](https://shinyapps.dreamrs.fr/shinyWidgets/).
+
+![](images/shinyWidgets.png){fig-align="center" width="80%"}
+
+#### `shinyPanels` 
+
+Collapsible shiny panels.
+
+![](images/shinyPanels.png){fig-align="center" width="80%"}
+
+#### `spsComps` 
+
+Cool Bootstrap 3 component - may not be compatible with `bs4dash` - use at your own risk!
+
+![](images/bspopover.png){fig-align="center" width="80%"}
+![](images/animations.gif){fig-align="center" width="80%"}
+
+#### `shinyFiles`
+
+Allows a button for you to access and browse files on the system.
+
+#### `directoryInput`
+
+![](images/directoryInput.png){fig-align="center" width="80%"}
+
+#### `shinyTime`
+
+Allows you to input time in HH:MM:SS format
+
+![](images/timeInput.png){fig-align="center" width="80%"}
+
+#### `shinySelect`
+
+Has nicer select options. You can use fontawesome icons!
+
+![](images/shinySelect.gif){fig-align="center" width="80%"}
+
+#### NestedMenu
+
+![](images/nestedMenu.gif){fig-align="center" width="80%"}
+#### `pivta`  
+
+Great for self service analytics projects. Allows you to have a 'pivot table' functionality online.
+
+![](images/pivta.gif){fig-align="center" width="80%"}
+
+
+### Other
+
+#### `fontawesome`
+
+Lots of cool icons to add to buttons, titles...anything! 
+
+```r
+
+
+---
+title: "Font Awesome in R Markdown"
+output: html_document
+---
+
+```{r load_packages, message=FALSE, warning=FALSE, include=FALSE} 
+library(fontawesome)
+```
+
+# Just a few tests with `r fa("font-awesome-logo-full", fill = "forestgreen")`
+
+It works well in headings...
+
+# `r fa("r-project", fill = "steelblue")` H1 Heading
+
+## `r fa("r-project", fill = "steelblue")` H2 Heading
+
+### `r fa("r-project", fill = "steelblue")` H3 Heading
+
+#### `r fa("r-project", fill = "steelblue")` H4 Heading
+
+##### `r fa("r-project", fill = "steelblue")` H5 Heading
+
+...and works equally well within inline text: `r fa("r-project", fill = "steelblue")`.
+
+```
+
+The code above produces this:
+
+![](images/fontawesome.png){fig-align="center" width="80%"}
+
+
+#### `esquisse`
+
+Makes `ggplot` a breeze!
+
+![](images/esquisse.gif){fig-align="center" width="80%"}
+![](images/esquissev2.png){fig-align="center" width="80%"}
+
+
+#### `toastui`
+
+Fantastic interactive calendar widget.
+
+![](images/grid-edit.png){fig-align="center" width="80%"}
+![](images/grid.png){fig-align="center" width="80%"}
+
+![](images/calendar-month.png){fig-align="center" width="80%"}
+![](images/calendar-week.png){fig-align="center" width="80%"}

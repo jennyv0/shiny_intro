@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.547">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ShinyTraining - flexdashboard Framework</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../site_libs/countdown-0.4.0/countdown.css" rel="stylesheet">
+<script src="../site_libs/countdown-0.4.0/countdown.js"></script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">ShinyTraining</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/Shiny Layout Fundamentals.html">Layouts and Dash Frameworks</a></li><li class="breadcrumb-item"><a href="../slides/FlexDashboard Framework.html">flexdashboard Framework</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">How this course will work</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome to Shiny 101!</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Getting Started</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/Planning Your Shiny App.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Planning Your Shiny App</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/Basic Structure of a Shiny App.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic Structure of a Shiny App</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/Reactivity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reactivity</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Layouts and Dash Frameworks</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/Shiny Layout Fundamentals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shiny Layout Fundamentals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/FlexDashboard Framework.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">flexdashboard Framework</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/ShinyDashboard Framework.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ShinyDashboard Framework</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/Widgets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Other cool things you can do with Shiny</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Aesthetics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/Theming - basics of CSS and HTML for Shiny.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theming - basics of CSS and HTML for Shiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/bslib.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">bslib</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Database connections</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/Connecting to external data sources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Connecting to external data sources</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Errors and debugging</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/Handling errors and debugging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Handling errors and debugging</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#flexdashboard" id="toc-flexdashboard" class="nav-link active" data-scroll-target="#flexdashboard">flexdashboard</a></li>
+  <li><a href="#demo---a-basic-flexdashboard" id="toc-demo---a-basic-flexdashboard" class="nav-link" data-scroll-target="#demo---a-basic-flexdashboard">Demo - A basic flexdashboard</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn">Your turn</a></li>
+  <li><a href="#flexdashboard-layouts" id="toc-flexdashboard-layouts" class="nav-link" data-scroll-target="#flexdashboard-layouts">flexdashboard Layouts</a>
+  <ul class="collapse">
+  <li><a href="#default" id="toc-default" class="nav-link" data-scroll-target="#default">Default</a></li>
+  <li><a href="#column-layout" id="toc-column-layout" class="nav-link" data-scroll-target="#column-layout">Column layout</a></li>
+  <li><a href="#row-layout" id="toc-row-layout" class="nav-link" data-scroll-target="#row-layout">Row layout</a></li>
+  <li><a href="#sidebar-layout" id="toc-sidebar-layout" class="nav-link" data-scroll-target="#sidebar-layout">Sidebar layout</a></li>
+  <li><a href="#tabset-layout" id="toc-tabset-layout" class="nav-link" data-scroll-target="#tabset-layout">Tabset layout</a></li>
+  <li><a href="#multipage-layout" id="toc-multipage-layout" class="nav-link" data-scroll-target="#multipage-layout">Multipage layout</a></li>
+  <li><a href="#storyboard-layout" id="toc-storyboard-layout" class="nav-link" data-scroll-target="#storyboard-layout">Storyboard layout</a></li>
+  <li><a href="#markdown-to-layout" id="toc-markdown-to-layout" class="nav-link" data-scroll-target="#markdown-to-layout">Markdown to layout</a></li>
+  <li><a href="#heading-options" id="toc-heading-options" class="nav-link" data-scroll-target="#heading-options">Heading options</a></li>
+  <li><a href="#some-useful-document-options" id="toc-some-useful-document-options" class="nav-link" data-scroll-target="#some-useful-document-options">Some useful document options</a></li>
+  <li><a href="#your-turn-1" id="toc-your-turn-1" class="nav-link" data-scroll-target="#your-turn-1">Your turn</a></li>
+  <li><a href="#shiny" id="toc-shiny" class="nav-link" data-scroll-target="#shiny">Shiny</a></li>
+  <li><a href="#demo---shiny-flexdashboard" id="toc-demo---shiny-flexdashboard" class="nav-link" data-scroll-target="#demo---shiny-flexdashboard">Demo - shiny + flexdashboard</a></li>
+  <li><a href="#components" id="toc-components" class="nav-link" data-scroll-target="#components">Components</a></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
+  <li><a href="#demo---components" id="toc-demo---components" class="nav-link" data-scroll-target="#demo---components">Demo - Components</a></li>
+  <li><a href="#linked-brushing" id="toc-linked-brushing" class="nav-link" data-scroll-target="#linked-brushing">Linked brushing</a></li>
+  <li><a href="#linked-brushing-1" id="toc-linked-brushing-1" class="nav-link" data-scroll-target="#linked-brushing-1">Linked brushing</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/Shiny Layout Fundamentals.html">Layouts and Dash Frameworks</a></li><li class="breadcrumb-item"><a href="../slides/FlexDashboard Framework.html">flexdashboard Framework</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">flexdashboard Framework</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="flexdashboard" class="level2">
+<h2 class="anchored" data-anchor-id="flexdashboard">flexdashboard</h2>
+<p>flexdashboard is the easiest way to get started making dashboards - at its core it is an RMarkdown document template that leverages CSS flexbox (+ a lot more) to generate attractive full page layouts that are well suited for publishing multiple data visualizations and related summaries and text.</p>
+<ul>
+<li><p>Dashboards are constructed using a RMarkdown document</p></li>
+<li><p>Row or column based layouts can be used</p></li>
+<li><p>Structure is specified via markdown headings</p></li>
+<li><p>Interactivity can be added by Shiny, but it is not required</p></li>
+<li><p>Quarto is not currently supported</p></li>
+</ul>
+</section>
+<section id="demo---a-basic-flexdashboard" class="level2">
+<h2 class="anchored" data-anchor-id="demo---a-basic-flexdashboard">Demo - A basic flexdashboard</h2>
+<ul>
+<li>the <code>output</code> in the YAML heading will be <code>flexdashboard</code></li>
+<li>in the example below, <code>------------------------</code> represents different rows</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> "Demo"</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="an">output:</span><span class="co"> </span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">  flexdashboard::flex_dashboard:</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">    orientation: rows</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">---</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="in">```{r global}</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="in">#| include: false</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="in">library(tidyverse)</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="in">ggplot2::theme_set(ggplot2::theme_bw())</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="in">d = readr::read_csv(here::here("data/weather.csv"))</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="in">d_city = d |&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="in">  filter(city %in% "Chicago")</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="in">```</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a></span>
+<span id="cb1-18"><a href="#cb1-18"></a>Row {data-height=650}</span>
+<span id="cb1-19"><a href="#cb1-19"></a>-------------------------------------</span>
+<span id="cb1-20"><a href="#cb1-20"></a></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="fu">### Temperature</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a></span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="in">```{r}</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="in">#| echo: false</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="in">d_city |&gt;</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="in">  ggplot(aes(x=time, y=temp)) +</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a><span class="in">  geom_line()</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="in">```</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a></span>
+<span id="cb1-30"><a href="#cb1-30"></a>Row {data-height=350}</span>
+<span id="cb1-31"><a href="#cb1-31"></a>-------------------------------------</span>
+<span id="cb1-32"><a href="#cb1-32"></a>   </span>
+<span id="cb1-33"><a href="#cb1-33"></a><span class="fu">### Humidity</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a></span>
+<span id="cb1-35"><a href="#cb1-35"></a><span class="in">```{r}</span></span>
+<span id="cb1-36"><a href="#cb1-36"></a><span class="in">#| echo: false</span></span>
+<span id="cb1-37"><a href="#cb1-37"></a><span class="in">d_city |&gt;</span></span>
+<span id="cb1-38"><a href="#cb1-38"></a><span class="in">  ggplot(aes(x=time, y=humidity)) +</span></span>
+<span id="cb1-39"><a href="#cb1-39"></a><span class="in">  geom_line()</span></span>
+<span id="cb1-40"><a href="#cb1-40"></a><span class="in">```</span>   </span>
+<span id="cb1-41"><a href="#cb1-41"></a></span>
+<span id="cb1-42"><a href="#cb1-42"></a>###</span>
+<span id="cb1-43"><a href="#cb1-43"></a></span>
+<span id="cb1-44"><a href="#cb1-44"></a><span class="in">```{r}</span></span>
+<span id="cb1-45"><a href="#cb1-45"></a><span class="in">d_city |&gt;</span></span>
+<span id="cb1-46"><a href="#cb1-46"></a><span class="in">  mutate(</span></span>
+<span id="cb1-47"><a href="#cb1-47"></a><span class="in">    day = lubridate::wday(time, label = TRUE, abbr = FALSE),</span></span>
+<span id="cb1-48"><a href="#cb1-48"></a><span class="in">    date = as.character(lubridate::date(time))</span></span>
+<span id="cb1-49"><a href="#cb1-49"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb1-50"><a href="#cb1-50"></a><span class="in">  group_by(date, day) |&gt;</span></span>
+<span id="cb1-51"><a href="#cb1-51"></a><span class="in">  summarize(</span></span>
+<span id="cb1-52"><a href="#cb1-52"></a><span class="in">    `min` = min(temp),</span></span>
+<span id="cb1-53"><a href="#cb1-53"></a><span class="in">    `max` = max(temp),</span></span>
+<span id="cb1-54"><a href="#cb1-54"></a><span class="in">    .groups = "drop"</span></span>
+<span id="cb1-55"><a href="#cb1-55"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb1-56"><a href="#cb1-56"></a><span class="in">  knitr::kable()</span></span>
+<span id="cb1-57"><a href="#cb1-57"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="your-turn" class="level2">
+<h2 class="anchored" data-anchor-id="your-turn">Your turn</h2>
+<p>Copy the code above, and try knitting it (remember to change line 13 to update where you have saved the data to!)</p>
+<p>Check that you are able to successfully render the flexdashboard.</p>
+<p>If everything is working try modifying the code:</p>
+<ul>
+<li><p>What happens if you remove <code>orientation: rows</code> from the front matter?</p></li>
+<li><p>What happens if you change the <code>Row</code> text?</p></li>
+<li><p>What happens if you change or remove <code>{data-height=*}</code>?</p></li>
+</ul>
+</section>
+<section id="flexdashboard-layouts" class="level1 page-columns page-full">
+<h1>flexdashboard Layouts</h1>
+<section id="default" class="level2">
+<h2 class="anchored" data-anchor-id="default">Default</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Default layout"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> flexdashboard::flex_dashboard</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 1</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 2</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/flexdashboard-layout-default.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="column-layout" class="level2">
+<h2 class="anchored" data-anchor-id="column-layout">Column layout</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Column layout"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> flexdashboard::flex_dashboard</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>Column</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 1</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>Column</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 2</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>   </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 3</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/flexdashboard-layout-cols.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="row-layout" class="level2">
+<h2 class="anchored" data-anchor-id="row-layout">Row layout</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Row layout"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">  flexdashboard::flex_dashboard:</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">    orientation: rows</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>Row</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 1</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 2</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span> </span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>Row</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 3</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 4</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/flexdashboard-layout-rows.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sidebar-layout" class="level2">
+<h2 class="anchored" data-anchor-id="sidebar-layout">Sidebar layout</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Sidebar layout"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> flexdashboard::flex_dashboard</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>Inputs {.sidebar}</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>Column</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 1</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 2</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/flexdashboard-layout-sidebar.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="tabset-layout" class="level2">
+<h2 class="anchored" data-anchor-id="tabset-layout">Tabset layout</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Tabset layout"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> flexdashboard::flex_dashboard</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>Column </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 1</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>Column {.tabset}</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 2</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>   </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 3</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/flexdashboard-layout-tabset.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="multipage-layout" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="multipage-layout">Multipage layout</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Multipage layout"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> flexdashboard::flex_dashboard</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>Page 1</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">=====================================  </span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>Column {data-width=600}</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 1</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>Column {data-width=400}</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 2</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>   </span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 3</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>Page 2 {data-orientation=rows}</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="fu">=====================================     </span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>Row {data-height=600}</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 4</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>Row {data-height=400}</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>-------------------------------------</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 5</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span>   </span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chart 6</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p><a href="https://pkgs.rstudio.com/flexdashboard/articles/examples.html" class="uri">https://pkgs.rstudio.com/flexdashboard/articles/examples.html</a> | CRAN Downloads</p>
+</div></div></section>
+<section id="storyboard-layout" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="storyboard-layout">Storyboard layout</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Storyboard layout"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> </span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">  flexdashboard::flex_dashboard:</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">    storyboard: true</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">### Frame 1</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>*** </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>Some commentary about Frame 1.</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">### Frame 2 {data-commentary-width=400}</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>*** </span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>Some commentary about Frame 2.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p><a href="https://pkgs.rstudio.com/flexdashboard/articles/examples.html" class="uri">https://pkgs.rstudio.com/flexdashboard/articles/examples.html</a> | htmlwidgets showcase</p>
+</div></div></section>
+<section id="markdown-to-layout" class="level2">
+<h2 class="anchored" data-anchor-id="markdown-to-layout">Markdown to layout</h2>
+<p>From the preceding examples it is relatively straightforward to see how markdown is translated into the flexdashboard’s layout,</p>
+<table class="table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 40%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Heading</th>
+<th style="text-align: left;">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Level 1</td>
+<td style="text-align: left;"><code>#</code> or <code>=======</code></td>
+<td style="text-align: left;">Pages</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Level 2</td>
+<td style="text-align: left;"><code>##</code> or <code>------</code></td>
+<td style="text-align: left;">Columns or rows<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Level 3</td>
+<td style="text-align: left;"><code>###</code></td>
+<td style="text-align: left;">Chart or output elements<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Horizontal Rules</td>
+<td style="text-align: left;"><code>***</code>, <code>---</code>, or <code>___</code></td>
+<td style="text-align: left;">Separate chart from commentary<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="heading-options" class="level2">
+<h2 class="anchored" data-anchor-id="heading-options">Heading options</h2>
+<p>You may have noticed certain headings were given additional attributes via arguments wrapped in <code>{}</code>. These are CSS attributes that modify the display behavior of the elements they are attached to. Some common attribues,</p>
+<ul>
+<li><p><code>data-height</code> and <code>data-width</code> control the <em>relative</em> size of elements</p></li>
+<li><p><code>data-padding</code> or <code>.no-padding</code> control the padding around elements in pixels</p></li>
+<li><p><code>data-orientation</code> can be applied to pages to alter the orientation for a specific page</p></li>
+<li><p><code>.tabset</code> indicates a column or row should be composed on tabset elements</p></li>
+<li><p><code>.sidebar</code> indicates a sidebar should be included (local or global)</p></li>
+</ul>
+</section>
+<section id="some-useful-document-options" class="level2">
+<h2 class="anchored" data-anchor-id="some-useful-document-options">Some useful document options</h2>
+<p>In the previous layout examples we saw the used some document options in the front matter, a couple of commonly used options that are worth knowning about:</p>
+<ul>
+<li><p><code>orientation</code> - default is <code>columns</code>, determines element layout orientation</p></li>
+<li><p><code>vertical_layout</code> - default is <code>fill</code> but <code>scroll</code> can be used to extend the viewable area</p></li>
+<li><p><code>self_contained</code> - default is <code>TRUE</code>, embeds all assessts within the html document (e.g.&nbsp;scripts, stylesheets, images, and videos)</p></li>
+<li><p><code>theme</code> - specifies a theme to use for styling (more on this later)</p></li>
+<li><p><code>navbar</code> - constructs a navigation bar at the top of the screen</p></li>
+</ul>
+</section>
+<section id="your-turn-1" class="level2">
+<h2 class="anchored" data-anchor-id="your-turn-1">Your turn</h2>
+<p>We’ve just seen a number of possible layout methods for a flexdashboard, lets return to the code we’ve seen previously, and try changing layout more purposefully this time (e.g.&nbsp;a column, multipage, or storyboard layout).</p>
+<p>Use this time to experiment with the different layout options and see what seems to work best.</p>
+<ul>
+<li><p>Try out a multipage or storyboard layout</p></li>
+<li><p>Try making a reasonable looking column layout</p></li>
+</ul>
+</section>
+<section id="shiny" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="shiny">Shiny</h2>
+<p>We can use Shiny components and reactivity in a flexdashboard (or any html output based RMarkdown document) by including <code>runtime: shiny</code> in the front matter.</p>
+<p>This results in the document being served by shiny (which has implications for sharing and publishing)</p>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>For flexdashboard’s using shiny you will often see a special <code>global</code> chunk which is responsible for loading data. This is a special feature of runtime: shiny designed to improve startup performance for multi-user shiny documents.</p>
+</div></div></section>
+<section id="demo---shiny-flexdashboard" class="level2">
+<h2 class="anchored" data-anchor-id="demo---shiny-flexdashboard">Demo - shiny + flexdashboard</h2>
+<div class="code-file sourceCode cell-code">
+
+</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="an">title:</span><span class="co"> "Demo"</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="an">output:</span><span class="co"> </span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">  flexdashboard::flex_dashboard</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="an">runtime:</span><span class="co"> shiny</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">---</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="in">```{r global}</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="in">library(tidyverse)</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="in">ggplot2::theme_set(ggplot2::theme_bw())</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="in">d = readr::read_csv(here::here("data/weather.csv"))</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="in">```</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="in">```{r}</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="in">d_vars = d |&gt;</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="in">  select(where(is.numeric)) |&gt;</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="in">  names()</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a></span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="in">d_city = reactive({</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="in">  d |&gt;</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="in">    filter(city %in% input$city)</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="in">})</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="in">```</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a></span>
+<span id="cb9-26"><a href="#cb9-26"></a></span>
+<span id="cb9-27"><a href="#cb9-27"></a>Inputs {.sidebar}</span>
+<span id="cb9-28"><a href="#cb9-28"></a>-------------------------------------</span>
+<span id="cb9-29"><a href="#cb9-29"></a></span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="in">```{r}</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="in">selectInput(</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a><span class="in">  "city", "Select a city",</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a><span class="in">  choices = c("Chicago", "Durham", "Sedona", "New York", "Los Angeles")</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a><span class="in">)</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a></span>
+<span id="cb9-36"><a href="#cb9-36"></a><span class="in">selectInput(</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a><span class="in">  "var", "Select a variable",</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a><span class="in">  choices = d_vars, selected = "humidity"</span></span>
+<span id="cb9-39"><a href="#cb9-39"></a><span class="in">)</span></span>
+<span id="cb9-40"><a href="#cb9-40"></a><span class="in">```</span></span>
+<span id="cb9-41"><a href="#cb9-41"></a></span>
+<span id="cb9-42"><a href="#cb9-42"></a></span>
+<span id="cb9-43"><a href="#cb9-43"></a>Col</span>
+<span id="cb9-44"><a href="#cb9-44"></a>-------------------------------------</span>
+<span id="cb9-45"><a href="#cb9-45"></a></span>
+<span id="cb9-46"><a href="#cb9-46"></a><span class="fu">### Temperature</span></span>
+<span id="cb9-47"><a href="#cb9-47"></a></span>
+<span id="cb9-48"><a href="#cb9-48"></a><span class="in">```{r}</span></span>
+<span id="cb9-49"><a href="#cb9-49"></a><span class="in">renderPlot({</span></span>
+<span id="cb9-50"><a href="#cb9-50"></a><span class="in">  d_city() |&gt;</span></span>
+<span id="cb9-51"><a href="#cb9-51"></a><span class="in">    ggplot(aes(x=time, y=temp)) +</span></span>
+<span id="cb9-52"><a href="#cb9-52"></a><span class="in">    ggtitle(input$city) + </span></span>
+<span id="cb9-53"><a href="#cb9-53"></a><span class="in">    geom_line()</span></span>
+<span id="cb9-54"><a href="#cb9-54"></a><span class="in">})</span></span>
+<span id="cb9-55"><a href="#cb9-55"></a><span class="in">```</span></span>
+<span id="cb9-56"><a href="#cb9-56"></a></span>
+<span id="cb9-57"><a href="#cb9-57"></a>Col</span>
+<span id="cb9-58"><a href="#cb9-58"></a>-------------------------------------</span>
+<span id="cb9-59"><a href="#cb9-59"></a>   </span>
+<span id="cb9-60"><a href="#cb9-60"></a><span class="fu">### Other</span></span>
+<span id="cb9-61"><a href="#cb9-61"></a></span>
+<span id="cb9-62"><a href="#cb9-62"></a><span class="in">```{r}</span></span>
+<span id="cb9-63"><a href="#cb9-63"></a><span class="in">renderPlot({</span></span>
+<span id="cb9-64"><a href="#cb9-64"></a><span class="in">  d_city() |&gt;</span></span>
+<span id="cb9-65"><a href="#cb9-65"></a><span class="in">    ggplot(aes(x=time, y=.data[[input$var]])) +</span></span>
+<span id="cb9-66"><a href="#cb9-66"></a><span class="in">    geom_line()</span></span>
+<span id="cb9-67"><a href="#cb9-67"></a><span class="in">})</span></span>
+<span id="cb9-68"><a href="#cb9-68"></a><span class="in">```</span>   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="components" class="level2">
+<h2 class="anchored" data-anchor-id="components">Components</h2>
+<p><code>flexdashboard</code> provides two built-in html components that can be included in your dashboard:</p>
+<p><br></p>
+<p>Value boxes:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/flexdashboard_value-box.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<p>Gauges:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/flexdashboard_gauges.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</section>
+<section id="implementation" class="level2">
+<h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
+<p>Either component can be included in the dashboard with a static value via directly calling <code>valueBox()</code> or <code>gauge()</code></p>
+<ul>
+<li><p>Shiny reactive variants can be implemented using <code>valueBoxOutput()</code> with <code>renderValueBox()</code> or <code>gaugeOutput()</code> with <code>renderGauge()</code></p></li>
+<li><p>Both components take a color argument, this can be either</p>
+<ul>
+<li><p>One of the standard bootstrap theme color names (i.e.&nbsp;“success”, “warning”, “danger”, “primary”, or “info”)</p></li>
+<li><p>or any other valid CSS color specifier</p></li>
+</ul></li>
+<li><p>Value box icons should use names from <a href="https://fortawesome.github.io/Font-Awesome/icons/">Font Awesome</a>, <a href="https://ionic.io/ionicons/v2/cheatsheet.html">Ionicons</a>, or <a href="https://getbootstrap.com/components/#glyphicons">Bootstrap Glyphicons</a></p></li>
+</ul>
+</section>
+<section id="demo---components" class="level2">
+<h2 class="anchored" data-anchor-id="demo---components">Demo - Components</h2>
+<div class="code-file sourceCode cell-code">
+
+</div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">---</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="an">title:</span><span class="co"> "Demo - value boxes and gauges"</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="an">output:</span><span class="co"> </span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">  flexdashboard::flex_dashboard</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="an">runtime:</span><span class="co"> shiny</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">---</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="in">```{r global}</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="in">library(tidyverse)</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="in">library(flexdashboard)</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="in">ggplot2::theme_set(ggplot2::theme_bw())</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="in">d = readr::read_csv(here::here("data/weather.csv"))</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="in">```</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="in">```{r}</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="in">d_vars = d |&gt;</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="in">  select(where(is.numeric)) |&gt;</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="in">  names()</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="in">d_city = reactive({</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="in">  d |&gt;</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="in">    filter(city %in% input$city)</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a><span class="in">})</span></span>
+<span id="cb10-25"><a href="#cb10-25"></a><span class="in">```</span></span>
+<span id="cb10-26"><a href="#cb10-26"></a></span>
+<span id="cb10-27"><a href="#cb10-27"></a>Col {data-width=800}</span>
+<span id="cb10-28"><a href="#cb10-28"></a>-------------------------------------</span>
+<span id="cb10-29"><a href="#cb10-29"></a></span>
+<span id="cb10-30"><a href="#cb10-30"></a>###</span>
+<span id="cb10-31"><a href="#cb10-31"></a></span>
+<span id="cb10-32"><a href="#cb10-32"></a><span class="in">```{r}</span></span>
+<span id="cb10-33"><a href="#cb10-33"></a><span class="in">selectInput(</span></span>
+<span id="cb10-34"><a href="#cb10-34"></a><span class="in">  "city", "Select a city",</span></span>
+<span id="cb10-35"><a href="#cb10-35"></a><span class="in">  choices = c("Chicago", "Durham", "Sedona", "New York", "Los Angeles")</span></span>
+<span id="cb10-36"><a href="#cb10-36"></a><span class="in">)</span></span>
+<span id="cb10-37"><a href="#cb10-37"></a></span>
+<span id="cb10-38"><a href="#cb10-38"></a><span class="in">renderPlot({</span></span>
+<span id="cb10-39"><a href="#cb10-39"></a><span class="in">  d_city() |&gt;</span></span>
+<span id="cb10-40"><a href="#cb10-40"></a><span class="in">    ggplot(aes(x=time, y=temp)) +</span></span>
+<span id="cb10-41"><a href="#cb10-41"></a><span class="in">    geom_line()</span></span>
+<span id="cb10-42"><a href="#cb10-42"></a><span class="in">}, height = 600)</span></span>
+<span id="cb10-43"><a href="#cb10-43"></a><span class="in">```</span></span>
+<span id="cb10-44"><a href="#cb10-44"></a></span>
+<span id="cb10-45"><a href="#cb10-45"></a>Col {data-width=200}</span>
+<span id="cb10-46"><a href="#cb10-46"></a>-------------------------------------</span>
+<span id="cb10-47"><a href="#cb10-47"></a></span>
+<span id="cb10-48"><a href="#cb10-48"></a><span class="fu">### Min temperature </span></span>
+<span id="cb10-49"><a href="#cb10-49"></a></span>
+<span id="cb10-50"><a href="#cb10-50"></a><span class="in">```{r}</span></span>
+<span id="cb10-51"><a href="#cb10-51"></a><span class="in">renderGauge({</span></span>
+<span id="cb10-52"><a href="#cb10-52"></a><span class="in">  gauge(</span></span>
+<span id="cb10-53"><a href="#cb10-53"></a><span class="in">    min(d_city()$temp),</span></span>
+<span id="cb10-54"><a href="#cb10-54"></a><span class="in">    min = 0, max=120, symbol = "°F",</span></span>
+<span id="cb10-55"><a href="#cb10-55"></a><span class="in">    gaugeSectors(success=c(60,90), warning=c(0,50), danger=c(90,120))</span></span>
+<span id="cb10-56"><a href="#cb10-56"></a><span class="in">  )</span></span>
+<span id="cb10-57"><a href="#cb10-57"></a><span class="in">})</span></span>
+<span id="cb10-58"><a href="#cb10-58"></a><span class="in">```</span></span>
+<span id="cb10-59"><a href="#cb10-59"></a></span>
+<span id="cb10-60"><a href="#cb10-60"></a><span class="fu">### Max temperature</span></span>
+<span id="cb10-61"><a href="#cb10-61"></a></span>
+<span id="cb10-62"><a href="#cb10-62"></a><span class="in">```{r}</span></span>
+<span id="cb10-63"><a href="#cb10-63"></a><span class="in">renderGauge({</span></span>
+<span id="cb10-64"><a href="#cb10-64"></a><span class="in">  gauge(</span></span>
+<span id="cb10-65"><a href="#cb10-65"></a><span class="in">    max(d_city()$temp),</span></span>
+<span id="cb10-66"><a href="#cb10-66"></a><span class="in">    min = 0, max=120, symbol = "°F",</span></span>
+<span id="cb10-67"><a href="#cb10-67"></a><span class="in">    gaugeSectors(success=c(60,90), warning=c(0,50), danger=c(90,120))</span></span>
+<span id="cb10-68"><a href="#cb10-68"></a><span class="in">  )</span></span>
+<span id="cb10-69"><a href="#cb10-69"></a><span class="in">})</span></span>
+<span id="cb10-70"><a href="#cb10-70"></a><span class="in">```</span></span>
+<span id="cb10-71"><a href="#cb10-71"></a></span>
+<span id="cb10-72"><a href="#cb10-72"></a><span class="fu">### Avg temperature</span></span>
+<span id="cb10-73"><a href="#cb10-73"></a></span>
+<span id="cb10-74"><a href="#cb10-74"></a><span class="in">```{r}</span></span>
+<span id="cb10-75"><a href="#cb10-75"></a><span class="in">renderValueBox({</span></span>
+<span id="cb10-76"><a href="#cb10-76"></a><span class="in">  avg = mean(d_city()$temp) |&gt; round(1)</span></span>
+<span id="cb10-77"><a href="#cb10-77"></a><span class="in">  valueBox(</span></span>
+<span id="cb10-78"><a href="#cb10-78"></a><span class="in">    avg,</span></span>
+<span id="cb10-79"><a href="#cb10-79"></a><span class="in">    caption = "Avg temp",</span></span>
+<span id="cb10-80"><a href="#cb10-80"></a><span class="in">    icon = "fa-thermometer-half",</span></span>
+<span id="cb10-81"><a href="#cb10-81"></a><span class="in">    color = case_when(</span></span>
+<span id="cb10-82"><a href="#cb10-82"></a><span class="in">      avg &gt;= 0 &amp; avg &lt; 50 ~ "warning",</span></span>
+<span id="cb10-83"><a href="#cb10-83"></a><span class="in">      avg &gt;=50 &amp; avg &lt; 90 ~ "success",</span></span>
+<span id="cb10-84"><a href="#cb10-84"></a><span class="in">      avg &gt;=90 &amp; avg &lt; 120 ~ "danger"</span></span>
+<span id="cb10-85"><a href="#cb10-85"></a><span class="in">    )</span></span>
+<span id="cb10-86"><a href="#cb10-86"></a><span class="in">  )</span></span>
+<span id="cb10-87"><a href="#cb10-87"></a><span class="in">})</span></span>
+<span id="cb10-88"><a href="#cb10-88"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_2364af17" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">08</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+</section>
+<section id="linked-brushing" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="linked-brushing">Linked brushing</h2>
+<p>This has nothing in particular to do with flexdashboard but is a super useful Shiny technique for improving interactivity.</p>
+<p>Shiny’s <code>plotOutput()</code>s can also be used to generate inputs based on user click events. Here we are using the brush rectangular selection to subset the data and then updating the relevant components.</p>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>For more technical details on how all of this works see <a href="https://mastering-shiny.org/action-graphics.html">Chapter 7</a> of <a href="https://mastering-shiny.org/index.html">Mastering Shiny</a>.</p>
+</div></div></section>
+<section id="linked-brushing-1" class="level2">
+<h2 class="anchored" data-anchor-id="linked-brushing-1">Linked brushing</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">---</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="an">title:</span><span class="co"> "Linked brushing"</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="an">output:</span><span class="co"> </span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">  flexdashboard::flex_dashboard</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="an">runtime:</span><span class="co"> shiny</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co">---</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="in">```{r global}</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="in">library(tidyverse)</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="in">library(flexdashboard)</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="in">ggplot2::theme_set(ggplot2::theme_bw())</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="in">d = readr::read_csv(here::here("data/weather.csv"))</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="in">```</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a></span>
+<span id="cb11-16"><a href="#cb11-16"></a><span class="in">```{r}</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a><span class="in">d_vars = d |&gt;</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a><span class="in">  select(where(is.numeric)) |&gt;</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="in">  names()</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a></span>
+<span id="cb11-21"><a href="#cb11-21"></a><span class="in">d_city = reactive({</span></span>
+<span id="cb11-22"><a href="#cb11-22"></a><span class="in">  d |&gt;</span></span>
+<span id="cb11-23"><a href="#cb11-23"></a><span class="in">    filter(city %in% input$city)</span></span>
+<span id="cb11-24"><a href="#cb11-24"></a><span class="in">})</span></span>
+<span id="cb11-25"><a href="#cb11-25"></a></span>
+<span id="cb11-26"><a href="#cb11-26"></a><span class="in">d_selected = reactive({</span></span>
+<span id="cb11-27"><a href="#cb11-27"></a><span class="in">  db = shiny::brushedPoints(d_city(), input$plot_brush)</span></span>
+<span id="cb11-28"><a href="#cb11-28"></a><span class="in">  if (nrow(db) == 0)</span></span>
+<span id="cb11-29"><a href="#cb11-29"></a><span class="in">    db = d_city()</span></span>
+<span id="cb11-30"><a href="#cb11-30"></a><span class="in">  db</span></span>
+<span id="cb11-31"><a href="#cb11-31"></a><span class="in">})</span></span>
+<span id="cb11-32"><a href="#cb11-32"></a><span class="in">```</span></span>
+<span id="cb11-33"><a href="#cb11-33"></a></span>
+<span id="cb11-34"><a href="#cb11-34"></a>Col {data-width=800}</span>
+<span id="cb11-35"><a href="#cb11-35"></a>-------------------------------------</span>
+<span id="cb11-36"><a href="#cb11-36"></a></span>
+<span id="cb11-37"><a href="#cb11-37"></a>###</span>
+<span id="cb11-38"><a href="#cb11-38"></a></span>
+<span id="cb11-39"><a href="#cb11-39"></a><span class="in">```{r}</span></span>
+<span id="cb11-40"><a href="#cb11-40"></a><span class="in">selectInput(</span></span>
+<span id="cb11-41"><a href="#cb11-41"></a><span class="in">  "city", "Select a city",</span></span>
+<span id="cb11-42"><a href="#cb11-42"></a><span class="in">  choices = c("Chicago", "Durham", "Sedona", "New York", "Los Angeles")</span></span>
+<span id="cb11-43"><a href="#cb11-43"></a><span class="in">)</span></span>
+<span id="cb11-44"><a href="#cb11-44"></a></span>
+<span id="cb11-45"><a href="#cb11-45"></a><span class="in">renderPlot(</span></span>
+<span id="cb11-46"><a href="#cb11-46"></a><span class="in">  {</span></span>
+<span id="cb11-47"><a href="#cb11-47"></a><span class="in">    d_city() |&gt;</span></span>
+<span id="cb11-48"><a href="#cb11-48"></a><span class="in">      ggplot(aes(x=time, y=temp)) +</span></span>
+<span id="cb11-49"><a href="#cb11-49"></a><span class="in">      geom_line()</span></span>
+<span id="cb11-50"><a href="#cb11-50"></a><span class="in">  },</span></span>
+<span id="cb11-51"><a href="#cb11-51"></a><span class="in">  outputArgs = list(</span></span>
+<span id="cb11-52"><a href="#cb11-52"></a><span class="in">    brush = shiny::brushOpts(id = "plot_brush")</span></span>
+<span id="cb11-53"><a href="#cb11-53"></a><span class="in">  ),</span></span>
+<span id="cb11-54"><a href="#cb11-54"></a><span class="in">  height = 600</span></span>
+<span id="cb11-55"><a href="#cb11-55"></a><span class="in">)</span></span>
+<span id="cb11-56"><a href="#cb11-56"></a><span class="in">```</span></span>
+<span id="cb11-57"><a href="#cb11-57"></a></span>
+<span id="cb11-58"><a href="#cb11-58"></a>Col {data-width=200}</span>
+<span id="cb11-59"><a href="#cb11-59"></a>-------------------------------------</span>
+<span id="cb11-60"><a href="#cb11-60"></a>   </span>
+<span id="cb11-61"><a href="#cb11-61"></a>   </span>
+<span id="cb11-62"><a href="#cb11-62"></a><span class="fu">### Starting time</span></span>
+<span id="cb11-63"><a href="#cb11-63"></a></span>
+<span id="cb11-64"><a href="#cb11-64"></a><span class="in">```{r}</span></span>
+<span id="cb11-65"><a href="#cb11-65"></a><span class="in">renderValueBox({</span></span>
+<span id="cb11-66"><a href="#cb11-66"></a><span class="in">  valueBox(</span></span>
+<span id="cb11-67"><a href="#cb11-67"></a><span class="in">    min(d_selected()$time),</span></span>
+<span id="cb11-68"><a href="#cb11-68"></a><span class="in">    caption = "Starting time",</span></span>
+<span id="cb11-69"><a href="#cb11-69"></a><span class="in">    icon = "fa-calendar-days"</span></span>
+<span id="cb11-70"><a href="#cb11-70"></a><span class="in">  )</span></span>
+<span id="cb11-71"><a href="#cb11-71"></a><span class="in">})</span></span>
+<span id="cb11-72"><a href="#cb11-72"></a><span class="in">```</span></span>
+<span id="cb11-73"><a href="#cb11-73"></a></span>
+<span id="cb11-74"><a href="#cb11-74"></a><span class="fu">### Ending time</span></span>
+<span id="cb11-75"><a href="#cb11-75"></a></span>
+<span id="cb11-76"><a href="#cb11-76"></a><span class="in">```{r}</span></span>
+<span id="cb11-77"><a href="#cb11-77"></a><span class="in">renderValueBox({</span></span>
+<span id="cb11-78"><a href="#cb11-78"></a><span class="in">  valueBox(</span></span>
+<span id="cb11-79"><a href="#cb11-79"></a><span class="in">    max(d_selected()$time),</span></span>
+<span id="cb11-80"><a href="#cb11-80"></a><span class="in">    caption = "Ending time",</span></span>
+<span id="cb11-81"><a href="#cb11-81"></a><span class="in">    icon = "fa-calendar-days"</span></span>
+<span id="cb11-82"><a href="#cb11-82"></a><span class="in">  )</span></span>
+<span id="cb11-83"><a href="#cb11-83"></a><span class="in">})</span></span>
+<span id="cb11-84"><a href="#cb11-84"></a><span class="in">```</span></span>
+<span id="cb11-85"><a href="#cb11-85"></a></span>
+<span id="cb11-86"><a href="#cb11-86"></a><span class="fu">### Min temperature </span></span>
+<span id="cb11-87"><a href="#cb11-87"></a></span>
+<span id="cb11-88"><a href="#cb11-88"></a><span class="in">```{r}</span></span>
+<span id="cb11-89"><a href="#cb11-89"></a><span class="in">renderGauge({</span></span>
+<span id="cb11-90"><a href="#cb11-90"></a><span class="in">  gauge(</span></span>
+<span id="cb11-91"><a href="#cb11-91"></a><span class="in">    min(d_selected()$temp),</span></span>
+<span id="cb11-92"><a href="#cb11-92"></a><span class="in">    min = 0, max=120, symbol = "°F",</span></span>
+<span id="cb11-93"><a href="#cb11-93"></a><span class="in">    gaugeSectors(success=c(60,90), warning=c(0,50), danger=c(90,120))</span></span>
+<span id="cb11-94"><a href="#cb11-94"></a><span class="in">  )</span></span>
+<span id="cb11-95"><a href="#cb11-95"></a><span class="in">})</span></span>
+<span id="cb11-96"><a href="#cb11-96"></a><span class="in">```</span></span>
+<span id="cb11-97"><a href="#cb11-97"></a></span>
+<span id="cb11-98"><a href="#cb11-98"></a><span class="fu">### Max temperature</span></span>
+<span id="cb11-99"><a href="#cb11-99"></a></span>
+<span id="cb11-100"><a href="#cb11-100"></a><span class="in">```{r}</span></span>
+<span id="cb11-101"><a href="#cb11-101"></a><span class="in">renderGauge({</span></span>
+<span id="cb11-102"><a href="#cb11-102"></a><span class="in">  gauge(</span></span>
+<span id="cb11-103"><a href="#cb11-103"></a><span class="in">    max(d_selected()$temp),</span></span>
+<span id="cb11-104"><a href="#cb11-104"></a><span class="in">    min = 0, max=120, symbol = "°F",</span></span>
+<span id="cb11-105"><a href="#cb11-105"></a><span class="in">    gaugeSectors(success=c(60,90), warning=c(0,50), danger=c(90,120))</span></span>
+<span id="cb11-106"><a href="#cb11-106"></a><span class="in">  )</span></span>
+<span id="cb11-107"><a href="#cb11-107"></a><span class="in">})</span></span>
+<span id="cb11-108"><a href="#cb11-108"></a><span class="in">```</span></span>
+<span id="cb11-109"><a href="#cb11-109"></a></span>
+<span id="cb11-110"><a href="#cb11-110"></a><span class="fu">### Avg temperature</span></span>
+<span id="cb11-111"><a href="#cb11-111"></a></span>
+<span id="cb11-112"><a href="#cb11-112"></a><span class="in">```{r}</span></span>
+<span id="cb11-113"><a href="#cb11-113"></a><span class="in">renderValueBox({</span></span>
+<span id="cb11-114"><a href="#cb11-114"></a><span class="in">  avg = mean(d_selected()$temp) |&gt; round(1)</span></span>
+<span id="cb11-115"><a href="#cb11-115"></a><span class="in">  valueBox(</span></span>
+<span id="cb11-116"><a href="#cb11-116"></a><span class="in">    avg,</span></span>
+<span id="cb11-117"><a href="#cb11-117"></a><span class="in">    caption = "Avg temp",</span></span>
+<span id="cb11-118"><a href="#cb11-118"></a><span class="in">    icon = "fa-thermometer-half",</span></span>
+<span id="cb11-119"><a href="#cb11-119"></a><span class="in">    color = case_when(</span></span>
+<span id="cb11-120"><a href="#cb11-120"></a><span class="in">      avg &gt;= 0 &amp; avg &lt; 50 ~ "warning",</span></span>
+<span id="cb11-121"><a href="#cb11-121"></a><span class="in">      avg &gt;=50 &amp; avg &lt; 90 ~ "success",</span></span>
+<span id="cb11-122"><a href="#cb11-122"></a><span class="in">      avg &gt;=90 &amp; avg &lt; 120 ~ "danger"</span></span>
+<span id="cb11-123"><a href="#cb11-123"></a><span class="in">    )</span></span>
+<span id="cb11-124"><a href="#cb11-124"></a><span class="in">  )</span></span>
+<span id="cb11-125"><a href="#cb11-125"></a><span class="in">})</span></span>
+<span id="cb11-126"><a href="#cb11-126"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>When using <code>==========</code> or <code>----------</code> the text on the preceeding line is required but the actual text does not matter. For <code>#</code> or <code>##</code> a text label is not required.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Depending on the <code>orientation</code> option<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>In a <code>storyboard</code> layout<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

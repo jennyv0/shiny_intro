@@ -1,0 +1,349 @@
+---
+title: "Basic Structure of a Shiny App"
+format:
+  revealjs:
+    incremental: true
+    theme: simple  
+filters: 
+- shinylive
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+## What is a Shiny app?
+
+-   Anything built using the Shiny framework!
+
+-   Can be a dashboard, can be a website, can be anything that connects to a database that changes it.
+
+-   For example:
+
+-   Shiny app as a nice front end to a RedCap database.
+
+## Shiny App
+
+<br/>
+
+::: columns
+::: {.column .larger width="40%"}
+Server
+
+::: {style="border: 2px solid; border-radius: 5px; text-align:center; font-size: 90px; height: 250px"}
+`r fontawesome::fa("r-project")` + `r fontawesome::fa("server")`
+:::
+:::
+
+::: {.column width="20%"}
+::: {style="text-align: center; font-size: 90px; padding-top: 20px"}
+<br/>⇄
+:::
+:::
+
+::: {.column .larger width="40%"}
+Client / Browser
+
+::: {style="border: 2px solid; border-radius: 5px; text-align: center; height: 250px"}
+::: {style="font-size: 90px"}
+`r fontawesome::fa("file-code")`
+:::
+
+::: {style="font-size: 50px"}
+`r fontawesome::fa("html5")` + `r fontawesome::fa("js")` + `r fontawesome::fa("css3")`
+:::
+:::
+:::
+:::
+
+## Key takeaways
+
+-   Shiny app =/= database
+-   Shiny app can be hosted online for everyone to access via a link, however, users must have access to all database connections
+
+## Shiny App Skeleton
+
+```{r shiny-anatomy}
+#| eval: false
+#| echo: true
+#| code-line-numbers: "|3-8|4|6-8"
+library(shiny)
+
+shinyApp(
+  ui = list(),
+  
+  server = function(input, output, session) {
+  
+  }
+)
+```
+
+## UI
+
+-   user interface
+-   mostly codes for the things you can see, layout and the widget
+-   where the inputs and outputs are declared
+-   **Best practice:** do NOT put your data analysis in this section!
+
+## Server
+
+-   contains all thing logic that creates the "outputs"
+-   Always save objects to display to the named output list, i.e. something of the form `output$xx`, where `xx` is the plot you want to display.
+-   Always build objects to display with one of the `render*()` functions, like we built our plot with `renderPlot()`.
+-   Use input values from the named input list, with `input$xx`.
+
+## A very basic shiny app
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 600
+#| components: [editor, viewer]
+
+library(shiny)
+
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+
+    # Application title
+    titlePanel("Old Faithful Geyser Data"),
+
+    # Sidebar with a slider input for number of bins 
+    sidebarLayout(
+        sidebarPanel(
+            sliderInput("bins",
+                        "Number of bins:",
+                        min = 1,
+                        max = 50,
+                        value = 30)
+        ),
+
+        # Show a plot of the generated distribution
+        mainPanel(
+           plotOutput("distPlot")
+        )
+    )
+)
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+
+    output$distPlot <- renderPlot({
+        # generate bins based on input$bins from ui.R
+        x    <- faithful[, 2]
+        bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+        # draw the histogram with the specified number of bins
+        hist(x, breaks = bins, col = 'darkgray', border = 'white',
+             xlab = 'Waiting time to next eruption (in mins)',
+             main = 'Histogram of waiting times')
+    })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+```
+
+## How it all comes together
+
+![](images/shiny-process.png){fig-align="center" width="100%"}
+
+## Key takeaways:
+
+Inputs: filters, widgets, buttons - anything that they user can use to interact with the app.
+Outputs: Graphs, tables...things that the app produces.
+
+When you look at traditionl apps/dashboards, inputs are usually up the top, or on the sidebar on the left, and the outputs are all of the grphs and tables that that you can interact with via the inputs.
+
+## How to organise your directory
+
+There are many options.
+The most simple ways to arrange your Shiny appsinclude:
+
+-   UI & Server in one Shiny Script
+-   UI & Server in different scripts
+-   Addition of `global.R` file
+
+& many more!
+
+## How to organise your directory
+
+UI & server in one Shiny script ![](images/single_script.png){fig-align="center" width="100%"}
+
+------------------------------------------------------------------------
+
+## How to organise your directory (cont)
+
+UI & server in one Shiny script:
+
+```{r shiny-single script}
+#| eval: false
+#| echo: true
+#| code-line-numbers: "4-25|26-39|41-42"
+
+library(shiny)
+
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+
+    # Application title
+    titlePanel("Old Faithful Geyser Data"),
+
+    # Sidebar with a slider input for number of bins 
+    sidebarLayout(
+        sidebarPanel(
+            sliderInput("bins",
+                        "Number of bins:",
+                        min = 1,
+                        max = 50,
+                        value = 30)
+        ),
+
+        # Show a plot of the generated distribution
+        mainPanel(
+           plotOutput("distPlot")
+        )
+    )
+)
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+
+    output$distPlot <- renderPlot({
+        # generate bins based on input$bins from ui.R
+        x    <- faithful[, 2]
+        bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+        # draw the histogram with the specified number of bins
+        hist(x, breaks = bins, col = 'darkgray', border = 'white',
+             xlab = 'Waiting time to next eruption (in mins)',
+             main = 'Histogram of waiting times')
+    })
+}
+
+ß
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+## How to organise your directory
+
+UI & server in seperate scripts ![](images/broken_down_script.png){fig-align="center" width="100%"} ---
+
+## How to organise your directory
+
+UI & server in seperate scripts - `ui.R`
+
+```{r ui}
+#| eval: false
+#| echo: true
+
+library(shiny)
+
+# Define UI for application that draws a histogram
+UI <- shinyUI({
+    fluidPage(
+        
+        # Application title
+        titlePanel("Old Faithful Geyser Data"),
+        
+        # Sidebar with a slider input for number of bins
+        sidebarLayout(
+            sidebarPanel(
+                sliderInput("bins",
+                            "Number of bins:",
+                            min = 1,
+                            max = 50,
+                            value = 30)
+            ),
+            
+            # Show a plot of the generated distribution
+            mainPanel(
+                plotOutput("distPlot")
+            )
+        )
+    )
+})
+```
+
+------------------------------------------------------------------------
+
+## How to organise your directory
+
+UI & server in seperate scripts - `server.R`
+
+```{r server}
+#| eval: false
+#| echo: true
+
+library(shiny)
+
+# Define server logic required to draw a histogram
+server <- function(input, output, session) {
+
+    output$distPlot <- renderPlot({
+
+        # generate bins based on input$bins from ui.R
+        x    <- faithful[, 2]
+        bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+        # draw the histogram with the specified number of bins
+        hist(x, breaks = bins, col = 'darkgray', border = 'white',
+             xlab = 'Waiting time to next eruption (in mins)',
+             main = 'Histogram of waiting times')
+
+    })
+
+}
+
+```
+
+------------------------------------------------------------------------
+
+## How to organise your directory
+
+UI & server in seperate scripts - `app.R`
+
+```{r app}
+#| eval: false
+#| echo: true
+
+library(shiny)
+source('UI.R', local = TRUE)
+source('server.R')
+
+shinyApp(
+  ui = UI,
+  server = server
+)
+
+```
+
+------------------------------------------------------------------------
+
+## How to organise your directory
+
+-   You can further break down the ui code into different tab scripts if creating an app with multiple tabs (using `tab1.R` scripts etc.)
+
+------------------------------------------------------------------------
+
+## How to organise your directory
+
+Addition of `global.R` script - Any pre-processing or functions can be saved to your `global.R` script to be used in `ui.R`, `server.R` or `app.R` files.
+- Generally more efficient.
+- However, with DB connections which require oauth in the UI script, there is limited use for this.
+
+------------------------------------------------------------------------
+
+## More advanced ways of organising your shiny projects:
+
+Later down the track, I would suggest looking at creating Shiny apps using the following frameworks
+
+### Golem:
+
+A Framework to create modularised, scalable apps packaged up like a package!
+[Productionising Shiny apps with Golem](https://engineering-shiny.org/golem.html)
+
+### Modules:
+
+Another way to package up long term, scalable apps.
+[Mastering Shiny - Packages](https://mastering-shiny.org/scaling-packaging.html#:~:text=If%20you%20are%20creating%20a,with%20your%20UI%20and%20server)

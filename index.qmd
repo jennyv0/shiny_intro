@@ -1,0 +1,21 @@
+---
+title: "Welcome to an Intro to Shiny!"
+---
+
+![](slides/images/logo.png){fig-align="center" width="20%"}
+
+This intro will be a speed run through the basics of Shiny – laying down the foundation for your journey into RShiny application development.
+
+![](slides/images/coding.gif){fig-align="center" width="80%"}
+
+Everything we will go through today will be on this website. We probably won't get through everything, but feel free to have a read of this in your own time and give the exercises a go.
+
+
+## Extra Resources
+
+| Content                                 | Link                                                      |
+|-----------------------------------------|:----------------------------------------------------------|
+| Google R Style Guide                    | [here](https://google.github.io/styleguide/Rguide.html)   |
+| Mastering Shiny                         | [here](https://mastering-shiny.org/)                      |
+| Engineering Production Grade Shiny Apps | [here](https://engineering-shiny.org/)                    |
+|                                         | [here](https://unleash-shiny.rinterface.com/beautify-css) |
