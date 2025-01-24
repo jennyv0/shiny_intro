@@ -10,9 +10,9 @@ filters:
 
 # Basic Reactivity
 
-The beauty of the Shiny app is the `reactivity`.
+The beauty of the Shiny app is`reactivity`.
 
-Shiny apps are build on 'reactivity' to make them interactive and responsive. So when you click on a button, or change something on the screen, the app updates itself without having to refresh the whole page. (Like other libraries used to create dashboards)
+Shiny apps use 'reactivity' to make them interactive and responsive. So when you click on a button, or change something on the screen, the app updates itself without having to refresh the whole page. (Unlike other libraries used to create dashboards)
 
 In a fully functioning Shiny app, you should be able to map out every interaction, calculation and output using a "reactive graph".
 
@@ -20,7 +20,8 @@ In a fully functioning Shiny app, you should be able to map out every interactio
 
 ### Example: 
 
-**Let's say we have an app with two plots (a scatter and distribution plot), and two inputs (a checkbox, and a slider). The scatter plot can be modified with both the checkbox and the slider, distribution plot is only interactive with the slider.:**
+**Let's say we have an app with two plots (a scatter and distribution plot), and two inputs (a check box, and a slider). The scatter plot can be modified with both the check box and the slider, distribution plot is only interactive with the slider:**
+
 
 ```{mermaid}
 %%| fig-width: 6
@@ -32,6 +33,8 @@ flowchart TD
   classDef changed fill:#f96
 ```
 
+
+**HOW REACTIVITY WORKS**
 
 **Initial state**
 
@@ -95,7 +98,7 @@ flowchart TD
 ```
 
 
-**Reactive graph**
+**The diagram below is known as the reactive graph.**
 
 ```{mermaid}
 %%| fig-width: 6
@@ -106,7 +109,7 @@ flowchart TD
 ```
 
 
-**Slider changes**
+**What happens when the slider changes?**
 
 ```{mermaid}
 %%| fig-width: 6
@@ -118,7 +121,7 @@ flowchart TD
   classDef changed fill:#f96
 ```
 
-**Invalidated**
+**The slider and dependencies become invalidated.**
 
 ```{mermaid}
 %%| fig-width: 6

@@ -331,8 +331,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="basic-reactivity" class="level1 page-columns page-full">
 <h1>Basic Reactivity</h1>
-<p>The beauty of the Shiny app is the <code>reactivity</code>.</p>
-<p>Shiny apps are build on ‘reactivity’ to make them interactive and responsive. So when you click on a button, or change something on the screen, the app updates itself without having to refresh the whole page. (Like other libraries used to create dashboards)</p>
+<p>The beauty of the Shiny app is<code>reactivity</code>.</p>
+<p>Shiny apps use ‘reactivity’ to make them interactive and responsive. So when you click on a button, or change something on the screen, the app updates itself without having to refresh the whole page. (Unlike other libraries used to create dashboards)</p>
 <p>In a fully functioning Shiny app, you should be able to map out every interaction, calculation and output using a “reactive graph”.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -341,7 +341,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="example" class="level3">
 <h3 class="anchored" data-anchor-id="example">Example:</h3>
-<p><strong>Let’s say we have an app with two plots (a scatter and distribution plot), and two inputs (a checkbox, and a slider). The scatter plot can be modified with both the checkbox and the slider, distribution plot is only interactive with the slider.:</strong></p>
+<p><strong>Let’s say we have an app with two plots (a scatter and distribution plot), and two inputs (a check box, and a slider). The scatter plot can be modified with both the check box and the slider, distribution plot is only interactive with the slider:</strong></p>
 <div class="cell" data-fig-width="6" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -359,6 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p><strong>HOW REACTIVITY WORKS</strong></p>
 <p><strong>Initial state</strong></p>
 <div class="cell" data-fig-width="6" data-layout-align="default">
 <div class="cell-output-display">
@@ -451,7 +452,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p><strong>Reactive graph</strong></p>
+<p><strong>The diagram below is known as the reactive graph.</strong></p>
 <div class="cell" data-fig-width="6" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -467,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p><strong>Slider changes</strong></p>
+<p><strong>What happens when the slider changes?</strong></p>
 <div class="cell" data-fig-width="6" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -485,7 +486,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p><strong>Invalidated</strong></p>
+<p><strong>The slider and dependencies become invalidated.</strong></p>
 <div class="cell" data-fig-width="6" data-layout-align="default">
 <div class="cell-output-display">
 <div>
