@@ -18,4 +18,4 @@ Everything we will go through today will be on this website. We probably won't g
 | Google R Style Guide                    | [here](https://google.github.io/styleguide/Rguide.html)   |
 | Mastering Shiny                         | [here](https://mastering-shiny.org/)                      |
 | Engineering Production Grade Shiny Apps | [here](https://engineering-shiny.org/)                    |
-|                                         | [here](https://unleash-shiny.rinterface.com/beautify-css) |
+| CSS For Shiny                              | [here](https://unleash-shiny.rinterface.com/beautify-css) |

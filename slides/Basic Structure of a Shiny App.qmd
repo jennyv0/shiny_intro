@@ -15,50 +15,18 @@ editor:
 
 -   Anything built using the Shiny framework!
 
--   Can be a dashboard, can be a website, can be anything that connects to a database that changes it.
+-   Can be a dashboard, can be a website, it can be a form...
 
 -   For example:
 
--   Shiny app as a nice front end to a RedCap database.
+-   Shiny app can be a nice front end to a RedCap database.
 
 ## Shiny App
 
-<br/>
+![](images/shiny_app_anatomy.png){fig-align="center" width="100%"}
 
-::: columns
-::: {.column .larger width="40%"}
-Server
+This continuous request-response cycle enables real-time interactivity within the application
 
-::: {style="border: 2px solid; border-radius: 5px; text-align:center; font-size: 90px; height: 250px"}
-`r fontawesome::fa("r-project")` + `r fontawesome::fa("server")`
-:::
-:::
-
-::: {.column width="20%"}
-::: {style="text-align: center; font-size: 90px; padding-top: 20px"}
-<br/>⇄
-:::
-:::
-
-::: {.column .larger width="40%"}
-Client / Browser
-
-::: {style="border: 2px solid; border-radius: 5px; text-align: center; height: 250px"}
-::: {style="font-size: 90px"}
-`r fontawesome::fa("file-code")`
-:::
-
-::: {style="font-size: 50px"}
-`r fontawesome::fa("html5")` + `r fontawesome::fa("js")` + `r fontawesome::fa("css3")`
-:::
-:::
-:::
-:::
-
-## Key takeaways
-
--   Shiny app =/= database
--   Shiny app can be hosted online for everyone to access via a link, however, users must have access to all database connections
 
 ## Shiny App Skeleton
 
@@ -86,8 +54,9 @@ shinyApp(
 
 ## Server
 
--   contains all thing logic that creates the "outputs"
--   Always save objects to display to the named output list, i.e. something of the form `output$xx`, where `xx` is the plot you want to display.
+-   contains all the logic that creates the "outputs"
+-   outputs are usually coded as `output$xxx` and inputs as `input$xxx`
+- 
 -   Always build objects to display with one of the `render*()` functions, like we built our plot with `renderPlot()`.
 -   Use input values from the named input list, with `input$xx`.
 
@@ -149,15 +118,13 @@ shinyApp(ui = ui, server = server)
 
 ## Key takeaways:
 
-Inputs: filters, widgets, buttons - anything that they user can use to interact with the app.
-Outputs: Graphs, tables...things that the app produces.
-
-When you look at traditionl apps/dashboards, inputs are usually up the top, or on the sidebar on the left, and the outputs are all of the grphs and tables that that you can interact with via the inputs.
+- Inputs: filters, widgets, buttons - anything that they user can use to interact with the app.
+- Outputs: Graphs, tables...things that the app produces.
 
 ## How to organise your directory
 
 There are many options.
-The most simple ways to arrange your Shiny appsinclude:
+The most simple ways to arrange your Shiny apps include:
 
 -   UI & Server in one Shiny Script
 -   UI & Server in different scripts

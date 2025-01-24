@@ -28,7 +28,7 @@
     "href": "slides/Basic Structure of a Shiny App.html#what-is-a-shiny-app",
     "title": "Basic Structure of a Shiny App",
     "section": "What is a Shiny app?",
-    "text": "What is a Shiny app?\n\nAnything built using the Shiny framework!\nCan be a dashboard, can be a website, can be anything that connects to a database that changes it.\nFor example:\nShiny app as a nice front end to a RedCap database.",
+    "text": "What is a Shiny app?\n\nAnything built using the Shiny framework!\nCan be a dashboard, can be a website, it can be a form…\nFor example:\nShiny app can be a nice front end to a RedCap database.",
     "crumbs": [
       "Home",
       "Getting Started",
@@ -40,7 +40,7 @@
     "href": "slides/Basic Structure of a Shiny App.html#shiny-app",
     "title": "Basic Structure of a Shiny App",
     "section": "Shiny App",
-    "text": "Shiny App\n\n\n\nServer\n\n + \n\n\n\n⇄\n\n\nClient / Browser\n\n\n\n\n\n +  +",
+    "text": "Shiny App\n\nThis continuous request-response cycle enables real-time interactivity within the application",
     "crumbs": [
       "Home",
       "Getting Started",
@@ -51,8 +51,8 @@
     "objectID": "slides/Basic Structure of a Shiny App.html#key-takeaways",
     "href": "slides/Basic Structure of a Shiny App.html#key-takeaways",
     "title": "Basic Structure of a Shiny App",
-    "section": "Key takeaways",
-    "text": "Key takeaways\n\nShiny app =/= database\nShiny app can be hosted online for everyone to access via a link, however, users must have access to all database connections",
+    "section": "Key takeaways:",
+    "text": "Key takeaways:\nInputs: filters, widgets, buttons - anything that they user can use to interact with the app. Outputs: Graphs, tables…things that the app produces.\nWhen you look at traditionl apps/dashboards, inputs are usually up the top, or on the sidebar on the left, and the outputs are all of the grphs and tables that that you can interact with via the inputs.",
     "crumbs": [
       "Home",
       "Getting Started",
