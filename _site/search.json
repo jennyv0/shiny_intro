@@ -88,7 +88,7 @@
     "href": "slides/Basic Structure of a Shiny App.html#server",
     "title": "Basic Structure of a Shiny App",
     "section": "Server",
-    "text": "Server\n\ncontains all the logic that creates the “outputs”\noutputs are usually coded as output$xxx and inputs as input$xxx\n\nAlways build objects to display with one of the render*() functions, like we built our plot with renderPlot().\nUse input values from the named input list, with input$xx.",
+    "text": "Server\n\ncontains all the logic that creates the “outputs”\noutputs are usually coded as output$xxx and inputs as input$xxx\nAlways build objects to display with one of the render*() functions, like we built our plot with renderPlot().\nUse input values from the named input list, with input$xx.",
     "crumbs": [
       "Home",
       "Getting Started",
