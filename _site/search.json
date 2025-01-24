@@ -52,7 +52,7 @@
     "href": "slides/Basic Structure of a Shiny App.html#key-takeaways",
     "title": "Basic Structure of a Shiny App",
     "section": "Key takeaways:",
-    "text": "Key takeaways:\nInputs: filters, widgets, buttons - anything that they user can use to interact with the app. Outputs: Graphs, tables…things that the app produces.\nWhen you look at traditionl apps/dashboards, inputs are usually up the top, or on the sidebar on the left, and the outputs are all of the grphs and tables that that you can interact with via the inputs.",
+    "text": "Key takeaways:\n\nInputs: filters, widgets, buttons - anything that they user can use to interact with the app.\nOutputs: Graphs, tables…things that the app produces.",
     "crumbs": [
       "Home",
       "Getting Started",
@@ -88,7 +88,7 @@
     "href": "slides/Basic Structure of a Shiny App.html#server",
     "title": "Basic Structure of a Shiny App",
     "section": "Server",
-    "text": "Server\n\ncontains all thing logic that creates the “outputs”\nAlways save objects to display to the named output list, i.e. something of the form output$xx, where xx is the plot you want to display.\nAlways build objects to display with one of the render*() functions, like we built our plot with renderPlot().\nUse input values from the named input list, with input$xx.",
+    "text": "Server\n\ncontains all the logic that creates the “outputs”\noutputs are usually coded as output$xxx and inputs as input$xxx\n\nAlways build objects to display with one of the render*() functions, like we built our plot with renderPlot().\nUse input values from the named input list, with input$xx.",
     "crumbs": [
       "Home",
       "Getting Started",
@@ -136,7 +136,7 @@
     "href": "slides/Basic Structure of a Shiny App.html#how-to-organise-your-directory",
     "title": "Basic Structure of a Shiny App",
     "section": "How to organise your directory",
-    "text": "How to organise your directory\nThere are many options. The most simple ways to arrange your Shiny appsinclude:\n\nUI & Server in one Shiny Script\nUI & Server in different scripts\nAddition of global.R file\n\n& many more!",
+    "text": "How to organise your directory\nThere are many options. The most simple ways to arrange your Shiny apps include:\n\nUI & Server in one Shiny Script\nUI & Server in different scripts\nAddition of global.R file\n\n& many more!",
     "crumbs": [
       "Home",
       "Getting Started",

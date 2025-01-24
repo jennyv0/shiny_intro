@@ -56,7 +56,6 @@ shinyApp(
 
 -   contains all the logic that creates the "outputs"
 -   outputs are usually coded as `output$xxx` and inputs as `input$xxx`
-- 
 -   Always build objects to display with one of the `render*()` functions, like we built our plot with `renderPlot()`.
 -   Use input values from the named input list, with `input$xx`.
 

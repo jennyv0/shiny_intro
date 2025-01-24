@@ -441,8 +441,9 @@
 <section id="server" class="slide level2">
 <h2>Server</h2>
 <ul>
-<li class="fragment">contains all thing logic that creates the “outputs”</li>
-<li class="fragment">Always save objects to display to the named output list, i.e.&nbsp;something of the form <code>output$xx</code>, where <code>xx</code> is the plot you want to display.</li>
+<li class="fragment">contains all the logic that creates the “outputs”</li>
+<li class="fragment">outputs are usually coded as <code>output$xxx</code> and inputs as <code>input$xxx</code></li>
+<li class="fragment"></li>
 <li class="fragment">Always build objects to display with one of the <code>render*()</code> functions, like we built our plot with <code>renderPlot()</code>.</li>
 <li class="fragment">Use input values from the named input list, with <code>input$xx</code>.</li>
 </ul>
@@ -502,12 +503,14 @@
 <img data-src="images/shiny-process.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key takeaways:</h2>
-<p>Inputs: filters, widgets, buttons - anything that they user can use to interact with the app. Outputs: Graphs, tables…things that the app produces.</p>
-<p>When you look at traditionl apps/dashboards, inputs are usually up the top, or on the sidebar on the left, and the outputs are all of the grphs and tables that that you can interact with via the inputs.</p>
+<ul>
+<li class="fragment">Inputs: filters, widgets, buttons - anything that they user can use to interact with the app.</li>
+<li class="fragment">Outputs: Graphs, tables…things that the app produces.</li>
+</ul>
 </section>
 <section id="how-to-organise-your-directory" class="slide level2">
 <h2>How to organise your directory</h2>
-<p>There are many options. The most simple ways to arrange your Shiny appsinclude:</p>
+<p>There are many options. The most simple ways to arrange your Shiny apps include:</p>
 <ul>
 <li class="fragment">UI &amp; Server in one Shiny Script</li>
 <li class="fragment">UI &amp; Server in different scripts</li>
